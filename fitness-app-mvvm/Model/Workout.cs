@@ -1,30 +1,53 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PRG_MAUI_Car_Register.Model
+namespace fitness_app_mvvm.Model
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
-    [JsonDerivedType(typeof(Car), "car")]
-    [JsonDerivedType(typeof(Motorcycle), "motorcycle")]
-    [JsonDerivedType(typeof(Truck), "truck")]
-    public abstract class Vehicle
+    [JsonDerivedType(typeof(WorkoutLeg), "leg")]
+    [JsonDerivedType(typeof(WorkoutCore), "core")]
+    [JsonDerivedType(typeof(WorkoutArm), "arm")]
+    public abstract class Workout
     {
         // Medlemsvariabler
-        public enum Type { Bil, MC, Lastbil };
-        private Type vehicleType;
-        private string registrationNumber = string.Empty;
-        private string manufacturer = string.Empty;
-        private string modelName = string.Empty;
-        private int modelYear = 0;
+        public enum Type { Arm, Leg, Core };
+        private Type workoutType;
+        private string Quantity = string.Empty;
+        private string Time = string.Empty;
+        private string Sort = string.Empty;
 
         public abstract string GetDesc();
 
         // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
-        protected Vehicle() { }
-        public Vehicle(Type vehicleType) // en konstruktor kan, men måste inte, ta parametrar
+        protected Workout() { }
+        public Workout(Type workoutType) // en konstruktor kan, men måste inte, ta parametrar
         {
-            this.vehicleType = vehicleType;
+            this.workoutType = workoutType;
+        }
+        
+        public Type workoutType
+        {
+            get { return workoutType; }
+            set { workoutType = value; }   
+        }
+        public string Quantity
+        {
+            get { return Quantity; }
+            set { Quantity = value; }
+        }
+        public string Time
+        {
+            get { return Time; }
+            set { Tíme = value; }
+        }
+        public string Sort
+        {
+            get { return Sort; }
+            set { Sort = value; }
         }
 
+
+        #region RegistrationNumber
+        /*
         // Get-Set för att hålla variablerna privata, och för att validera inkommande värden från UI (user interface, användargränssnittet)
         public string RegistrationNumber
         {
@@ -62,14 +85,20 @@ namespace PRG_MAUI_Car_Register.Model
                 registrationNumber = value.ToUpper();
             }
         }
-
+        */
+        #endregion
+        #region VehicleType
+        /*
         // Fordonstyp tas in från dropdown-menyn, och behöver därför inte valideras
         public Type VehicleType
         {
             get { return vehicleType; }
             set { vehicleType = value; }
         }
-
+        */
+        #endregion
+        #region ModelName
+        /*
         //TODO Tillverkare ska valideras, sparas i objektet och visas i UI
         public string ModelName
         {
@@ -86,7 +115,10 @@ namespace PRG_MAUI_Car_Register.Model
                 }
             }
         }
-
+        */
+        #endregion
+        #region ModelYear
+        /*
         public string ModelYear
         {
             get { return modelYear.ToString(); }
@@ -109,23 +141,20 @@ namespace PRG_MAUI_Car_Register.Model
                 }
             }
         }
-
+        */
+        #endregion
+        #region Manufacturer 
+        /*
         //TODO Modell ska valideras, sparas i objektet och visas i UI
         public string Manufacturer
         {
             get { return manufacturer; }
             set
             {
-                if (!value.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)))
-                {
-                    throw new ArgumentException("Tillverkarfältet måste ha giltigt innehåll");
-                }
-                else
-                {
-                    manufacturer = value;
-                }
-
+                manufacturer = value;
             }
         }
+        */
+        #endregion
     }
 }

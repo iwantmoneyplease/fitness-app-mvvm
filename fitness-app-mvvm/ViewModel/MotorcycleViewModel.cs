@@ -1,5 +1,5 @@
-﻿using PRG_MAUI_Car_Register.Model;
-using PRG_MAUI_Car_Register.ViewModel;
+﻿using fitness_app_mvvm.Model;
+using fitness_app_mvvm.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,8 +16,8 @@ class MotorcycleViewModel : INotifyPropertyChanged
     void OnPropertyChanged([CallerMemberName] string n = null)
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
 
-    public ObservableCollection<Vehicle> Motorcycles { get; }
-        = new ObservableCollection<Vehicle>();
+    public ObservableCollection<Workout> Motorcycles { get; }
+        = new ObservableCollection<Workout>();
 
     private string _searchQuery;
     public string SearchQuery
@@ -47,7 +47,7 @@ class MotorcycleViewModel : INotifyPropertyChanged
     {
         Motorcycles.Clear(); //clears cars before loading new q
         foreach (var v in VehicleService.Instance.VehicleItems
-                     .Where(v => v.VehicleType == Vehicle.Type.MC))
+                     .Where(v => v.VehicleType == Workout.Type.MC))
             Motorcycles.Add(v);
     }
 

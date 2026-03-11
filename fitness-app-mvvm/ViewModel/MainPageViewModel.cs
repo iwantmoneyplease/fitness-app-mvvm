@@ -1,5 +1,5 @@
-﻿using PRG_MAUI_Car_Register.Model;
-using PRG_MAUI_Car_Register.Services;
+﻿using fitness_app_mvvm.Model;
+using fitness_app_mvvm.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,12 +11,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PRG_MAUI_Car_Register.ViewModel
+namespace fitness_app_mvvm.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        public IList<Vehicle.Type> VehicleTypes { get; } =
-        Enum.GetValues(typeof(Vehicle.Type)).Cast<Vehicle.Type>().ToList();
+        public IList<Workout.Type> VehicleTypes { get; } =
+        Enum.GetValues(typeof(Workout.Type)).Cast<Workout.Type>().ToList();
 
         //PropertyChanged looks for new input
         public event PropertyChangedEventHandler PropertyChanged;
@@ -54,15 +54,15 @@ namespace PRG_MAUI_Car_Register.ViewModel
             set { _modelYear = value; OnPropertyChanged(); }
         }
 
-        private Vehicle.Type _selectedType = Vehicle.Type.Bil;
-        public Vehicle.Type SelectedType
+        private Workout.Type _selectedType = Workout.Type.Bil;
+        public Workout.Type SelectedType
         {
             get => _selectedType;
             set { _selectedType = value; OnPropertyChanged(); }
         }
 
         //COMMAND AND SEARCH ----------------------------------------------------
-        public ObservableCollection<Vehicle> Vehicles => VehicleService.Instance.VehicleItems;
+        public ObservableCollection<Workout> Vehicles => VehicleService.Instance.VehicleItems;
 
         //Commands for buttons
         public ICommand RegisterCommand { get; }
@@ -120,20 +120,20 @@ namespace PRG_MAUI_Car_Register.ViewModel
         {
             try
             {
-                Vehicle vehicle;
+                Workout vehicle;
 
                 switch (SelectedType)
                 {
-                    case Vehicle.Type.Bil:
-                        vehicle = new Car();
+                    case Workout.Type.Bil:
+                        vehicle = new WorkoutLeg();
                         break;
 
-                    case Vehicle.Type.MC:
-                        vehicle = new Motorcycle();
+                    case Workout.Type.MC:
+                        vehicle = new WorkoutCore();
                         break;
 
-                    case Vehicle.Type.Lastbil:
-                        vehicle = new Truck();
+                    case Workout.Type.Lastbil:
+                        vehicle = new WorkoutArm();
                         break;
 
                     default:

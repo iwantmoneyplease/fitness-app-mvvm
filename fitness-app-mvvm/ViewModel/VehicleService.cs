@@ -1,4 +1,4 @@
-﻿using PRG_MAUI_Car_Register.Model;
+﻿using fitness_app_mvvm.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using static Microsoft.Maui.ApplicationModel.Permissions;
 using static System.Reflection.Metadata.BlobBuilder;
 
-namespace PRG_MAUI_Car_Register.ViewModel
+namespace fitness_app_mvvm.ViewModel
 {
     class VehicleService
     {
@@ -17,11 +17,11 @@ namespace PRG_MAUI_Car_Register.ViewModel
         public static VehicleService Instance => _instance ??= new VehicleService();
 
         //själva listan
-        public ObservableCollection<Vehicle> VehicleItems { get; set; }
+        public ObservableCollection<Workout> VehicleItems { get; set; }
 
         private VehicleService()
         {
-            VehicleItems = new ObservableCollection<Vehicle>();
+            VehicleItems = new ObservableCollection<Workout>();
         }
     }
 
