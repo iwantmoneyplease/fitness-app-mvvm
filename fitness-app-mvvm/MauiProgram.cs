@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
-using PRG_MAUI_Car_Register.ViewModel;
-using PRG_MAUI_Car_Register.Services;
+using fitness_app_mvvm.ViewModel;
+using fitness_app_mvvm.Services;
 
 #if WINDOWS
 using Microsoft.UI;
@@ -10,7 +10,7 @@ using WinRT.Interop; // För Win32Interop
 using Windows.Graphics; // För SizeInt32
 #endif
 
-namespace PRG_MAUI_Car_Register
+namespace fitness_app_mvvm
 {
     public static class MauiProgram
     {

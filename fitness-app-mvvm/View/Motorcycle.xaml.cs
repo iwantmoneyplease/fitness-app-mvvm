@@ -1,7 +1,7 @@
-using PRG_MAUI_Car_Register.ViewModel;
-using PRG_MAUI_Car_Register.View;
+using fitness_app_mvvm.ViewModel;
+using fitness_app_mvvm.View;
 
-namespace PRG_MAUI_Car_Register.View
+namespace fitness_app_mvvm.View
 {
     public partial class Motorcycle : ContentPage
     {

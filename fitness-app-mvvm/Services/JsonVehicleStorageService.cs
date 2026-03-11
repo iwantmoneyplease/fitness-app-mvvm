@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using PRG_MAUI_Car_Register.Model;
+using fitness_app_mvvm.Model;
 
-namespace PRG_MAUI_Car_Register.Services
+namespace fitness_app_mvvm.Services
 {
     public class JsonVehicleStorageService : IVehicleStorageService
     {
@@ -14,7 +14,7 @@ namespace PRG_MAUI_Car_Register.Services
                 "vehicles.json");
         }
 
-        public async Task SaveAsync(IEnumerable<Vehicle> vehicles)
+        public async Task SaveAsync(IEnumerable<Workout> vehicles)
         {
             var json = JsonSerializer.Serialize(vehicles,
                 new JsonSerializerOptions { WriteIndented = true });
@@ -22,14 +22,14 @@ namespace PRG_MAUI_Car_Register.Services
             await File.WriteAllTextAsync(_filePath, json);
         }
 
-        public async Task<IList<Vehicle>> LoadAsync()
+        public async Task<IList<Workout>> LoadAsync()
         {
             if (!File.Exists(_filePath))
-                return new List<Vehicle>();
+                return new List<Workout>();
 
             var json = await File.ReadAllTextAsync(_filePath);
-            return JsonSerializer.Deserialize<List<Vehicle>>(json)
-                   ?? new List<Vehicle>();
+            return JsonSerializer.Deserialize<List<Workout>>(json)
+                   ?? new List<Workout>();
         }
     }
 }

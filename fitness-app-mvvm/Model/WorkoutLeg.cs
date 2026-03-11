@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRG_MAUI_Car_Register.Model
+namespace fitness_app_mvvm.Model
 {
-    public class Car : Vehicle
+    public class WorkoutLeg : Workout
     {
-        public Car() : base(Type.Bil)
+        public WorkoutLeg() : base(Type.Leg)
         {
 
         }
