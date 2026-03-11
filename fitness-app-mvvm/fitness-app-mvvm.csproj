@@ -65,16 +65,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\Car.xaml">
+	  <Compile Update="View\CreatePage.xaml.cs">
+	    <DependentUpon>CreatePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\StatsPage.xaml.cs">
+	    <DependentUpon>StatsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\SettingsPage.xaml.cs">
+	    <DependentUpon>SettingsPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="View\CreatePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Motorcycle.xaml">
+	  <MauiXaml Update="View\StatsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Truck.xaml">
+	  <MauiXaml Update="View\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
