@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="fitness_app_mvvm.View.Car"
-             Title="Car">
-    <VerticalStackLayout>
-        <ListView ItemsSource="{Binding Cars}" Margin="0,0,0,20"/>
+             x:Class="fitness_app_mvvm.View.CreatePage"
+             Title="CreatePage">
+    <!-- Full ChatGPT kod -->
+    <!-- Länk till konversation: https://chatgpt.com/share/69b19551-bf10-8013-9e70-1f69e97d7a37 -->
+    <VerticalStackLayout Padding="20">
 
-        <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="20">
-            <Entry Placeholder="Sök registreringsnummer"
-                   Text="{Binding SearchQuery}" />
+        <!-- Type buttons -->
+        <CollectionView ItemsSource="{Binding Types}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                    Text="{Binding Name}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectTypeCommand}"
+                    CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-            <Button Text="Sök"
-                    Command="{Binding SearchCommand}"
-                    BackgroundColor="DarkRed" />
-        </HorizontalStackLayout>
-        <Label Text="{Binding SearchResult}" TextColor="DarkRed" Margin="0,20,0,0"/>
+        <!-- Property buttons -->
+        <CollectionView ItemsSource="{Binding Properties}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                    Text="{Binding .}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectPropertyCommand}"
+                    CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </VerticalStackLayout>
 </ContentPage>
