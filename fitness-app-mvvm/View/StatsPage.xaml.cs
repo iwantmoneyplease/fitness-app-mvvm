@@ -3,12 +3,12 @@ using fitness_app_mvvm.View;
 
 namespace fitness_app_mvvm.View
 {
-    public partial class Motorcycle : ContentPage
+    public partial class UserHistory : User
     {
-        public Motorcycle()
+        public UserHistory()
         {
             InitializeComponent();
-            BindingContext = new MotorcycleViewModel();
+            BindingContext = new UserHistoryViewModel();
         }
     }
 }
