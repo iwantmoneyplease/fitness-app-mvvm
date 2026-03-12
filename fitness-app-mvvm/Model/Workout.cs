@@ -8,44 +8,43 @@ namespace fitness_app_mvvm.Model
     [JsonDerivedType(typeof(WorkoutArm), "arm")]
     public abstract class Workout
     {
-        // Medlemsvariabler
-        public enum Type { Arm, Leg, Core };
-        private Type workoutType;
-        private string Quantity = string.Empty;
-        private string Time = string.Empty;
-        private string Sort = string.Empty;
+        //hejsan. du hade en massa getsets där nere. nu är de här uppe -leo xoxo
+        public enum Category { Arm, Leg, Core };
+        public Category WorkoutType { get; set; }
+        public string Quantity { get; set; } = string.Empty;
+        public string Time { get; set; } = string.Empty;
+        public string ExerciseName { get; set; } = string.Empty;
 
         public abstract string GetDesc();
 
-        // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
         protected Workout() { }
-        public Workout(Type workoutType) // en konstruktor kan, men måste inte, ta parametrar
+        protected Workout(Category type)
         {
-            this.workoutType = workoutType;
-        }
-        
-        public Type workoutType
-        {
-            get { return workoutType; }
-            set { workoutType = value; }   
-        }
-        public string Quantity
-        {
-            get { return Quantity; }
-            set { Quantity = value; }
-        }
-        public string Time
-        {
-            get { return Time; }
-            set { Tíme = value; }
-        }
-        public string Sort
-        {
-            get { return Sort; }
-            set { Sort = value; }
+            this.WorkoutType = type;
         }
 
-
+        #region getsets
+        //public Type workoutType
+        //{
+        //    get { return workoutType; }
+        //    set { workoutType = value; }   
+        //}
+        //public string Quantity
+        //{
+        //    get { return Quantity; }
+        //    set { Quantity = value; }
+        //}
+        //public string Time
+        //{
+        //    get { return Time; }
+        //    set { Tíme = value; }
+        //}
+        //public string Sort
+        //{
+        //    get { return Sort; }
+        //    set { Sort = value; }
+        //}
+        #endregion
         #region RegistrationNumber
         /*
         // Get-Set för att hålla variablerna privata, och för att validera inkommande värden från UI (user interface, användargränssnittet)
