@@ -24,25 +24,25 @@ namespace fitness_app_mvvm.Model
             this.workoutType = workoutType;
         }
         
-        public Type workoutType
+        public Type WorkoutType
         {
             get { return workoutType; }
             set { workoutType = value; }   
         }
         public string Quantity
         {
-            get { return Quantity; }
-            set { Quantity = value; }
+            get { return quantity; }
+            set { quantity = value; }
         }
         public string Time
         {
-            get { return Time; }
-            set { Tíme = value; }
+            get { return time; }
+            set { time = value; }
         }
         public string Sort
         {
-            get { return Sort; }
-            set { Sort = value; }
+            get { return sort; }
+            set { sort = value; }
         }
 
 
