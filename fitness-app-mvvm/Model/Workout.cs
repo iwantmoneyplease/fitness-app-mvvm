@@ -11,9 +11,9 @@ namespace fitness_app_mvvm.Model
         // Medlemsvariabler
         public enum Type { Arm, Leg, Core };
         private Type workoutType;
-        private string Quantity = string.Empty;
-        private string Time = string.Empty;
-        private string Sort = string.Empty;
+        private string quantity = string.Empty;
+        private string time = string.Empty;
+        private string sort = string.Empty;
 
         public abstract string GetDesc();
 
@@ -24,7 +24,7 @@ namespace fitness_app_mvvm.Model
             this.workoutType = workoutType;
         }
         
-        public Type WorkoutType
+        public Type WorkoutType 
         {
             get { return workoutType; }
             set { workoutType = value; }   
