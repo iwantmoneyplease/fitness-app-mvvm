@@ -8,7 +8,7 @@ namespace fitness_app_mvvm.View
         public Truck()
         {
             InitializeComponent();
-            BindingContext = new TruckViewModel();
+            // BindingContext = new TruckViewModel();
         }
     }
 }
