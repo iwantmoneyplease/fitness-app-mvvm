@@ -9,7 +9,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+/*
+ 
 class TruckViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
@@ -64,3 +65,4 @@ class TruckViewModel : INotifyPropertyChanged
             : $"{result.RegistrationNumber} {result.Manufacturer} {result.ModelName} ({result.ModelYear})";
     }
 }
+*/
