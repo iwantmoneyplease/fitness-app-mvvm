@@ -8,7 +8,7 @@ namespace fitness_app_mvvm.View
         public Motorcycle()
         {
             InitializeComponent();
-            BindingContext = new MotorcycleViewModel();
+            // BindingContext = new MotorcycleViewModel();
         }
     }
 }

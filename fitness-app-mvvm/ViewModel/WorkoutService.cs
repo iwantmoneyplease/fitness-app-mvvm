@@ -10,18 +10,18 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace fitness_app_mvvm.ViewModel
 {
-    class VehicleService
+    class WorkoutService
     {
         //singleton
-        private static VehicleService _instance;
-        public static VehicleService Instance => _instance ??= new VehicleService();
+        private static WorkoutService _instance;
+        public static WorkoutService Instance => _instance ??= new WorkoutService();
 
         //själva listan
-        public ObservableCollection<Workout> VehicleItems { get; set; }
+        public ObservableCollection<Workout> WorkoutItems { get; set; }
 
-        private VehicleService()
+        private WorkoutService()
         {
-            VehicleItems = new ObservableCollection<Workout>();
+            WorkoutItems = new ObservableCollection<Workout>();
         }
     }
 

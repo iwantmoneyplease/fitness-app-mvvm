@@ -19,7 +19,7 @@ namespace fitness_app_mvvm.Model
 
         public override string ToString()
         {
-            return $"{RegistrationNumber} {Manufacturer} {ModelName} {ModelYear} - MC";
+            return $"{Quantity} {Time} {Sort} {WorkoutType}";
         }
     }
 }

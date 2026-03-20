@@ -26,7 +26,7 @@ namespace fitness_app_mvvm
                 });
 
             // IStudentStorageService injiceras automatiskt i StudentsViewModel konstruktor, och använder Singleton
-            builder.Services.AddSingleton<IVehicleStorageService, JsonVehicleStorageService>();
+            builder.Services.AddSingleton<IWorkoutStorageService, JsonWorkoutStorageService>();
 
             // Transient är inte helt nödvändig för enklare appar, men ser till att helt ny instans skapas varje gång beroendet efterfrågas (Dependency Inversion Principle (DIP) ur SOLID)
             builder.Services.AddTransient<MainPageViewModel>();

@@ -3,20 +3,20 @@ using fitness_app_mvvm.Model;
 
 namespace fitness_app_mvvm.Services
 {
-    public class JsonVehicleStorageService : IVehicleStorageService
+    public class JsonWorkoutStorageService : IWorkoutStorageService
     {
         private readonly string _filePath;
 
-        public JsonVehicleStorageService()
+        public JsonWorkoutStorageService()
         {
             _filePath = Path.Combine(
                 FileSystem.AppDataDirectory,
-                "vehicles.json");
+                "workouts.json");
         }
 
-        public async Task SaveAsync(IEnumerable<Workout> vehicles)
+        public async Task SaveAsync(IEnumerable<Workout> workouts)
         {
-            var json = JsonSerializer.Serialize(vehicles,
+            var json = JsonSerializer.Serialize(workouts,
                 new JsonSerializerOptions { WriteIndented = true });
 
             await File.WriteAllTextAsync(_filePath, json);

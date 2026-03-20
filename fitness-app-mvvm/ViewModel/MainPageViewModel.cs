@@ -15,7 +15,7 @@ namespace fitness_app_mvvm.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        public IList<Workout.Type> VehicleTypes { get; } =
+        public IList<Workout.Type> WorkoutTypes { get; } =
         Enum.GetValues(typeof(Workout.Type)).Cast<Workout.Type>().ToList();
 
         //PropertyChanged looks for new input
@@ -23,38 +23,31 @@ namespace fitness_app_mvvm.ViewModel
         void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        private readonly IVehicleStorageService _storage;
+        private readonly IWorkoutStorageService _storage;
 
         //INPUT (Get:Set) -------------------------------------------------------
-        private string _registrationNumber;
-        public string RegistrationNumber
+        private string _quantity;
+        public string Quantity
         {
-            get => _registrationNumber;
-            set { _registrationNumber = value; OnPropertyChanged(); }
+            get => _quantity;
+            set { _quantity = value; OnPropertyChanged(); }
         }
 
-        private string _manufacturer;
-        public string Manufacturer
+        private string _time;
+        public string Time 
         {
-            get => _manufacturer;
-            set { _manufacturer = value; OnPropertyChanged(); }
+            get => _time;
+            set { _time = value; OnPropertyChanged(); }
         }
 
-        private string _modelName;
-        public string ModelName
+        private string _sort;
+        public string Sort      
         {
-            get => _modelName;
-            set { _modelName = value; OnPropertyChanged(); }
+            get => _sort;
+            set { _sort = value; OnPropertyChanged(); }
         }
 
-        private string _modelYear;
-        public string ModelYear
-        {
-            get => _modelYear;
-            set { _modelYear = value; OnPropertyChanged(); }
-        }
-
-        private Workout.Type _selectedType = Workout.Type.Bil;
+        private Workout.Type _selectedType = Workout.Type.Arm;
         public Workout.Type SelectedType
         {
             get => _selectedType;
@@ -62,33 +55,17 @@ namespace fitness_app_mvvm.ViewModel
         }
 
         //COMMAND AND SEARCH ----------------------------------------------------
-        public ObservableCollection<Workout> Vehicles => VehicleService.Instance.VehicleItems;
+        public ObservableCollection<Workout> Workouts => WorkoutService.Instance.WorkoutItems;
 
         //Commands for buttons
         public ICommand RegisterCommand { get; }
-        public ICommand SearchCommand { get; }
-
-        //Search result
-        private string _searchQuery;
-        public string SearchQuery
-        {
-            get => _searchQuery;
-            set { _searchQuery = value; OnPropertyChanged(); }
-        }
-
-        private string _searchResult;
-        public string SearchResult
-        {
-            get => _searchResult;
-            set { _searchResult = value; OnPropertyChanged(); }
-        }
+        public ICommand SaveCommand { get; }
 
         public MainPageViewModel()
         {
-            _storage = new JsonVehicleStorageService();
+            _storage = new JsonWorkoutStorageService();
 
             RegisterCommand = new Command(RegisterVehicle);
-            SearchCommand = new Command(SearchVehicle);
 
             SaveCommand = new Command(async () => await SaveAsync());
             _ = LoadAsync();
@@ -98,11 +75,11 @@ namespace fitness_app_mvvm.ViewModel
         {
             try
             {
-                var vehicles = await _storage.LoadAsync();
-                Vehicles.Clear();
+                var workouts = await _storage.LoadAsync();
+                Workouts.Clear();
 
-                foreach (var vehicle in vehicles)
-                    Vehicles.Add(vehicle);
+                foreach (var workout in workouts)
+                    Workouts.Add(workout);
             }
             catch (Exception ex)
             {
@@ -112,7 +89,7 @@ namespace fitness_app_mvvm.ViewModel
 
         private async Task SaveAsync()
         {
-            await _storage.SaveAsync(Vehicles);
+            await _storage.SaveAsync(Workouts);
         }
 
         //COMMAND METHODS ------------------------------------------------------
@@ -120,37 +97,38 @@ namespace fitness_app_mvvm.ViewModel
         {
             try
             {
-                Workout vehicle;
+                Workout workout;
 
                 switch (SelectedType)
                 {
-                    case Workout.Type.Bil:
-                        vehicle = new WorkoutLeg();
+                    case Workout.Type.Arm:
+                        workout = new WorkoutLeg();
                         break;
 
-                    case Workout.Type.MC:
-                        vehicle = new WorkoutCore();
+                    case Workout.Type.Leg:
+                        workout = new WorkoutCore();
                         break;
 
-                    case Workout.Type.Lastbil:
-                        vehicle = new WorkoutArm();
+                    case Workout.Type.Core:
+                        workout = new WorkoutArm();
                         break;
 
                     default:
                         throw new ArgumentException("Välj en giltig fordons typ");
                 }
 
-                vehicle.RegistrationNumber = RegistrationNumber;
-                vehicle.Manufacturer = Manufacturer;
-                vehicle.ModelName = ModelName;
-                vehicle.ModelYear = ModelYear;
+                workout.Quantity = Quantity;
+                workout.Time = Time;
+                workout.Sort = Sort;
 
-                VehicleService.Instance.VehicleItems.Add(vehicle);
+                WorkoutService.Instance.WorkoutItems.Add(workout);
 
-                foreach (var brum in VehicleService.Instance.VehicleItems)
+                /* Vad är detta ???
+                foreach (var brum in WorkoutService.Instance.WorkoutItems)
                 {
                     Debug.WriteLine($"Bilar finns i MainPage: {brum.Manufacturer}");
                 }
+                */
 
                 //clear input
                 ClearEntryFields();
@@ -163,30 +141,11 @@ namespace fitness_app_mvvm.ViewModel
             }
         }
 
-        private void SearchVehicle()
-        {
-            var query = SearchQuery?.Trim() ?? "";
-            var result = Vehicles.FirstOrDefault(v =>
-                !string.IsNullOrEmpty(v.RegistrationNumber) &&
-                v.RegistrationNumber.Contains(query, StringComparison.OrdinalIgnoreCase)
-             );
-
-            if (result == null)
-            {
-                SearchResult = "Inget fordon hittades.";
-            }
-            else
-            {
-                SearchResult = $"{result.RegistrationNumber} {result.Manufacturer} {result.ModelName} ({result.ModelYear})";
-            }
-        }
-
         public void ClearEntryFields()
         {
-            RegistrationNumber = string.Empty;
-            Manufacturer = string.Empty;
-            ModelName = string.Empty;
-            ModelYear = string.Empty;
+            Quantity = string.Empty;
+            Time = string.Empty;
+            Sort = string.Empty;
         }
     }
 }

@@ -3,9 +3,9 @@
 namespace fitness_app_mvvm.Services
 {
     // poängen med detta interface är att vi enkelt ska kunna byta Json till något annat, som SQLite
-    public interface IVehicleStorageService
+    public interface IWorkoutStorageService
     {
-        Task SaveAsync(IEnumerable<Workout> vehicles);
+        Task SaveAsync(IEnumerable<Workout> workouts);
         Task<IList<Workout>> LoadAsync();
     }
 }
