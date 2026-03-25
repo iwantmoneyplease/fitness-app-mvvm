@@ -14,7 +14,9 @@ namespace fitness_app_mvvm.Model
         private string quantity = string.Empty;
         private string time = string.Empty;
         private string sort = string.Empty;
-
+        
+        // ChatGPT för Sort
+        // https://chatgpt.com/g/g-p-69c39c58c4a08191b8caf696a889ca22-fitness-mvvm/c/69c3b37a-2fb0-8327-88dd-d28d9c6888a2
         public abstract string GetDesc();
 
         // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
@@ -23,7 +25,6 @@ namespace fitness_app_mvvm.Model
         {
             this.workoutType = workoutType;
         }
-
         public Type WorkoutType
         {
             get { return workoutType; }
