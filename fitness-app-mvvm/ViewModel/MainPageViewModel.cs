@@ -93,7 +93,7 @@ namespace fitness_app_mvvm.ViewModel
         }
 
         //COMMAND METHODS ------------------------------------------------------
-        private void RegisterVehicle()
+        private void RegisterExercise()
         {
             try
             {
