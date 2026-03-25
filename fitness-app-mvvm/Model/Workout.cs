@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace fitness_app_mvvm.Model
 {
@@ -16,9 +11,9 @@ namespace fitness_app_mvvm.Model
         // Medlemsvariabler
         public enum Type { Arm, Leg, Core };
         private Type workoutType;
-        private string Quantity = string.Empty;
-        private string Time = string.Empty;
-        private string Sort = string.Empty;
+        private string quantity = string.Empty;
+        private string time = string.Empty;
+        private string sort = string.Empty;
 
         public abstract string GetDesc();
 
@@ -29,25 +24,25 @@ namespace fitness_app_mvvm.Model
             this.workoutType = workoutType;
         }
 
-        public Type workoutType
+        public Type WorkoutType
         {
             get { return workoutType; }
             set { workoutType = value; }
         }
         public string Quantity
         {
-            get { return Quantity; }
-            set { Quantity = value; }
+            get { return quantity; }
+            set { quantity = value; }
         }
         public string Time
         {
-            get { return Time; }
-            set { Tíme = value; }
+            get { return time; }
+            set { time = value; }
         }
         public string Sort
         {
-            get { return Sort; }
-            set { Sort = value; }
+            get { return sort; }
+            set { sort = value; }
         }
 
 
@@ -104,7 +99,6 @@ namespace fitness_app_mvvm.Model
         #endregion
         #region ModelName
         /*
-        //TODO Tillverkare ska valideras, sparas i objektet och visas i UI
         public string ModelName
         {
             get { return modelName; }
@@ -150,7 +144,6 @@ namespace fitness_app_mvvm.Model
         #endregion
         #region Manufacturer 
         /*
-        //TODO Modell ska valideras, sparas i objektet och visas i UI
         public string Manufacturer
         {
             get { return manufacturer; }
