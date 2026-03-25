@@ -1,53 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace fitness_app_mvvm.ViewModel
+public class MainViewModel : BaseViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    private readonly DrinkModel _model = new();
+
+    public ObservableCollection<DrinkType> DrinkOptions { get; set; }
+        = new();
+
+    private bool showOptions;
+    public bool ShowOptions
     {
-        //PropertyChanged looks for new input
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        get => showOptions;
+        set => SetProperty(ref showOptions, value);
+    }
 
-        //  GETS AND SETS
+    public ICommand CoffeeCommand { get; }
+    public ICommand TeaCommand { get; }
 
-        private bool showCoffeeOptions;
-        public bool ShowCoffeeOptions
+    public MainViewModel()
+    {
+        CoffeeCommand = new Command(() =>
         {
-            get => showCoffeeOptions;
-            set => SetProperty(ref showCoffeeOptions, value);
-        }
+            DrinkOptions.Clear();
+            foreach (var item in _model.CoffeeTypes)
+                DrinkOptions.Add(item);
 
-        private bool showTeaOptions;
-        public bool ShowTeaOptions
+            ShowOptions = true;
+        });
+
+        TeaCommand = new Command(() =>
         {
-            get => showTeaOptions;
-            set => SetProperty(ref showTeaOptions, value);
-        }
+            DrinkOptions.Clear();
+            foreach (var item in _model.TeaTypes)
+                DrinkOptions.Add(item);
 
-        public ICommand CoffeeCommand { get; }
-        public ICommand TeaCommand { get; }
-
-        public MainViewModel()
-        {
-            CoffeeCommand = new Command(() =>
-            {
-                ShowCoffeeOptions = true;
-                ShowTeaOptions = false;
-            });
-
-            TeaCommand = new Command(() =>
-            {
-                ShowTeaOptions = true;
-                ShowCoffeeOptions = false;
-            });
-        }
+            ShowOptions = true;
+        });
     }
 }
