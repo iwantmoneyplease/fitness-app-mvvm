@@ -3,33 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fitness_app_mvvm.View.CreatePage"
              Title="CreatePage">
-    <!-- Full ChatGPT kod -->
-    <!-- Länk till konversation: https://chatgpt.com/share/69b19551-bf10-8013-9e70-1f69e97d7a37 -->
-    <VerticalStackLayout Padding="20">
+    <VerticalStackLayout Padding="20" Spacing="10">
 
-        <!-- Type buttons -->
-        <CollectionView ItemsSource="{Binding Types}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Button
-                    Text="{Binding Name}"
-                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectTypeCommand}"
-                    CommandParameter="{Binding .}" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Label Text="Vad vill du dricka?" />
 
-        <!-- Property buttons -->
-        <CollectionView ItemsSource="{Binding Properties}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Button
-                    Text="{Binding .}"
-                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectPropertyCommand}"
-                    CommandParameter="{Binding .}" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Button 
+        Text="Kaffe"
+        Command="{Binding CoffeeCommand}" />
+
+        <Button 
+        Text="Te"
+        Command="{Binding TeaCommand}" />
+
+        <!-- Kaffeval -->
+        <VerticalStackLayout IsVisible="{Binding ShowCoffeeOptions}">
+            <Label Text="Vilken typ av kaffe?" />
+            <Button Text="Latte" />
+            <Button Text="Cappuccino" />
+            <Button Text="Espresso" />
+        </VerticalStackLayout>
+
+        <!-- Teval -->
+        <VerticalStackLayout IsVisible="{Binding ShowTeaOptions}">
+            <Label Text="Vilken typ av te?" />
+            <Button Text="Grönt te" />
+            <Button Text="Svart te" />
+            <Button Text="Chai" />
+        </VerticalStackLayout>
 
     </VerticalStackLayout>
 </ContentPage>
