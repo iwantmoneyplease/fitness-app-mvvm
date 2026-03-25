@@ -65,7 +65,7 @@ namespace fitness_app_mvvm.ViewModel
         {
             _storage = new JsonWorkoutStorageService();
 
-            RegisterCommand = new Command(RegisterVehicle);
+            RegisterCommand = new Command(RegisterExercise);
 
             SaveCommand = new Command(async () => await SaveAsync());
             _ = LoadAsync();
@@ -123,7 +123,8 @@ namespace fitness_app_mvvm.ViewModel
 
                 WorkoutService.Instance.WorkoutItems.Add(workout);
 
-                /* Vad är detta ???
+                //TODO Vad är detta ???
+                /*
                 foreach (var brum in WorkoutService.Instance.WorkoutItems)
                 {
                     Debug.WriteLine($"Bilar finns i MainPage: {brum.Manufacturer}");
