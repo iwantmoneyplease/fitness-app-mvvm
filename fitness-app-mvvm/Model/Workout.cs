@@ -99,7 +99,6 @@ namespace fitness_app_mvvm.Model
         #endregion
         #region ModelName
         /*
-        //TODO Tillverkare ska valideras, sparas i objektet och visas i UI
         public string ModelName
         {
             get { return modelName; }
@@ -145,7 +144,6 @@ namespace fitness_app_mvvm.Model
         #endregion
         #region Manufacturer 
         /*
-        //TODO Modell ska valideras, sparas i objektet och visas i UI
         public string Manufacturer
         {
             get { return manufacturer; }
