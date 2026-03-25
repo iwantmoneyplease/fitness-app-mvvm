@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fitness_app_mvvm.View.CreatePage"
+             Title="CreatePage">
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label Text="Vad vill du dricka?" />
+
+        <Button 
+        Text="Kaffe"
+        Command="{Binding CoffeeCommand}" />
+
+        <Button 
+        Text="Te"
+        Command="{Binding TeaCommand}" />
+
+        <!-- Kaffeval -->
+        <VerticalStackLayout IsVisible="{Binding ShowCoffeeOptions}">
+            <Label Text="Vilken typ av kaffe?" />
+            <Button Text="Latte" />
+            <Button Text="Cappuccino" />
+            <Button Text="Espresso" />
+        </VerticalStackLayout>
+
+        <!-- Teval -->
+        <VerticalStackLayout IsVisible="{Binding ShowTeaOptions}">
+            <Label Text="Vilken typ av te?" />
+            <Button Text="Grönt te" />
+            <Button Text="Svart te" />
+            <Button Text="Chai" />
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

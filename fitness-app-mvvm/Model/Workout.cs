@@ -23,11 +23,11 @@ namespace fitness_app_mvvm.Model
         {
             this.workoutType = workoutType;
         }
-        
-        public Type WorkoutType 
+
+        public Type WorkoutType
         {
             get { return workoutType; }
-            set { workoutType = value; }   
+            set { workoutType = value; }
         }
         public string Quantity
         {
