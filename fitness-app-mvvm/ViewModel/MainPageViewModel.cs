@@ -15,13 +15,12 @@ namespace fitness_app_mvvm.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        public IList<Workout.Type> WorkoutTypes { get; } =
-        Enum.GetValues(typeof(Workout.Type)).Cast<Workout.Type>().ToList();
-
         //PropertyChanged looks for new input
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        public IList<Workout.Type> WorkoutTypes { get; } =
+        Enum.GetValues(typeof(Workout.Type)).Cast<Workout.Type>().ToList();
 
         private readonly IWorkoutStorageService _storage;
 

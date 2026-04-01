@@ -8,7 +8,7 @@ namespace fitness_app_mvvm.View
         public StatsPage()
         {
             InitializeComponent();
-            BindingContext = new UserHistoryViewModel();
+            BindingContext = new StatsPageViewModel();
         }
     }
 }
