@@ -4,41 +4,44 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using fitness_app_mvvm.Model;
 
-public class WorkoutViewModel : INotifyPropertyChanged
+namespace fitness_app_mvvm.ViewModel
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-    void OnPropertyChanged([CallerMemberName] string n = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
-
-    private Workout currentWorkout;
-
-    public ObservableCollection<string> SortOptions { get; } = new();
-
-    public bool ShowSortOptions { get; set; }
-
-    public ICommand ArmCommand { get; }
-    public ICommand LegCommand { get; }
-    public ICommand CoreCommand { get; }
-
-    public WorkoutViewModel()
+    public class CreatePageViewModel : INotifyPropertyChanged
     {
-        ArmCommand = new Command(() => SelectWorkout(new WorkoutArm()));
-        LegCommand = new Command(() => SelectWorkout(new WorkoutLeg()));
-        CoreCommand = new Command(() => SelectWorkout(new WorkoutCore()));
-    }
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string n = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
 
-    private void SelectWorkout(Workout workout)
-    {
-        currentWorkout = workout;
+        private Workout currentWorkout;
 
-        SortOptions.Clear();
+        public ObservableCollection<string> SortOptions { get; } = new();
 
-        foreach (var option in workout.SortOptions)
+        public bool ShowSortOptions { get; set; }
+
+        public ICommand ArmCommand { get; }
+        public ICommand LegCommand { get; }
+        public ICommand CoreCommand { get; }
+
+        public WorkoutViewModel()
         {
-            SortOptions.Add(option);
+            ArmCommand = new Command(() => SelectWorkout(new WorkoutArm()));
+            LegCommand = new Command(() => SelectWorkout(new WorkoutLeg()));
+            CoreCommand = new Command(() => SelectWorkout(new WorkoutCore()));
         }
 
-        ShowSortOptions = true;
-        OnPropertyChanged(nameof(ShowSortOptions));
+        private void SelectWorkout(Workout workout)
+        {
+            currentWorkout = workout;
+
+            SortOptions.Clear();
+
+            foreach (var option in workout.SortOptions)
+            {
+                SortOptions.Add(option);
+            }
+
+            ShowSortOptions = true;
+            OnPropertyChanged(nameof(ShowSortOptions));
+        }
     }
 }

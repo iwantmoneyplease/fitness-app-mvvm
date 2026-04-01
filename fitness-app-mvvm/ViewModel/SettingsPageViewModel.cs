@@ -9,7 +9,7 @@ using System.Text;
 //Detta är länken till konversationen: https://chatgpt.com/share/69b19551-bf10-8013-9e70-1f69e97d7a37
 namespace fitness_app_mvvm.ViewModel
 {
-    public class TypeSelectorViewModel
+    public class ViewModel
     {
         public ObservableCollection<Type> Types { get; } = new();
         public ObservableCollection<string> Properties { get; } = new();
