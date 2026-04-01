@@ -12,9 +12,16 @@ namespace fitness_app_mvvm.Model
         {
 
         }
+        public override List<string> SortOptions => new()
+        {
+            "Jumping Jacks",
+            "Squats",
+            "Step Ups",
+            "Running"
+        };
         public override string GetDesc()
         {
-            return "This is a car. They have four wheels, and usually carry a maximum of five people";
+            return "Leg workout";
         }
         public override string ToString()
         {

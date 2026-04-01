@@ -20,6 +20,7 @@ namespace fitness_app_mvvm.Model
         public abstract string GetDesc();
 
         // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
+        public abstract List<string> SortOptions { get; } // Vad användaren kan välja
         protected Workout() { }
         public Workout(Type workoutType) // en konstruktor kan, men måste inte, ta parametrar
         {
@@ -40,10 +41,16 @@ namespace fitness_app_mvvm.Model
             get { return time; }
             set { time = value; }
         }
-        public string Sort
+        public string Sort // Vad användaren har valt
         {
             get { return sort; }
-            set { sort = value; }
+            set 
+            {
+                if (SortOptions.Contains(value))
+                {
+                    sort = value;
+                }
+            }
         }
 
 
