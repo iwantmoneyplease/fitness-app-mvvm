@@ -1,24 +1,28 @@
-<VerticalStackLayout Padding="20">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fitness_app_mvvm.View.MainPage">
+    
+    <VerticalStackLayout>
+        <Label Text="Vilken typ av workout?" />
 
-    <Button 
-        Text="Kaffe"
-        Command="{Binding CoffeeCommand}" />
+        <Button Text="Arm" Command="{Binding ArmCommand}" />
+        <Button Text="Leg" Command="{Binding LegCommand}" />
+        <Button Text="Core" Command="{Binding CoreCommand}" />
 
-    <Button 
-        Text="Te"
-        Command="{Binding TeaCommand}" />
+        <CollectionView 
+            ItemsSource="{Binding SortOptions}"
+            IsVisible="{Binding ShowSortOptions}">
 
-    <CollectionView 
-        ItemsSource="{Binding DrinkOptions}"
-        IsVisible="{Binding ShowOptions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button Text="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Button Text="{Binding Name}" />
-            </DataTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+    
+</ContentPage>
 
-        </CollectionView.ItemTemplate>
 
-    </CollectionView>
 
-</VerticalStackLayout>

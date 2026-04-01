@@ -1,41 +1,44 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using fitness_app_mvvm.Model;
 
-public class MainViewModel : BaseViewModel
+public class WorkoutViewModel : INotifyPropertyChanged
 {
-    private readonly DrinkModel _model = new();
+    public event PropertyChangedEventHandler PropertyChanged;
+    void OnPropertyChanged([CallerMemberName] string n = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
 
-    public ObservableCollection<DrinkType> DrinkOptions { get; set; }
-        = new();
+    private Workout currentWorkout;
 
-    private bool showOptions;
-    public bool ShowOptions
+    public ObservableCollection<string> SortOptions { get; } = new();
+
+    public bool ShowSortOptions { get; set; }
+
+    public ICommand ArmCommand { get; }
+    public ICommand LegCommand { get; }
+    public ICommand CoreCommand { get; }
+
+    public WorkoutViewModel()
     {
-        get => showOptions;
-        set => SetProperty(ref showOptions, value);
+        ArmCommand = new Command(() => SelectWorkout(new WorkoutArm()));
+        LegCommand = new Command(() => SelectWorkout(new WorkoutLeg()));
+        CoreCommand = new Command(() => SelectWorkout(new WorkoutCore()));
     }
 
-    public ICommand CoffeeCommand { get; }
-    public ICommand TeaCommand { get; }
-
-    public MainViewModel()
+    private void SelectWorkout(Workout workout)
     {
-        CoffeeCommand = new Command(() =>
+        currentWorkout = workout;
+
+        SortOptions.Clear();
+
+        foreach (var option in workout.SortOptions)
         {
-            DrinkOptions.Clear();
-            foreach (var item in _model.CoffeeTypes)
-                DrinkOptions.Add(item);
+            SortOptions.Add(option);
+        }
 
-            ShowOptions = true;
-        });
-
-        TeaCommand = new Command(() =>
-        {
-            DrinkOptions.Clear();
-            foreach (var item in _model.TeaTypes)
-                DrinkOptions.Add(item);
-
-            ShowOptions = true;
-        });
+        ShowSortOptions = true;
+        OnPropertyChanged(nameof(ShowSortOptions));
     }
 }
