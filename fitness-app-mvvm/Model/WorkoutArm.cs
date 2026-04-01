@@ -13,9 +13,16 @@ namespace fitness_app_mvvm.Model
         {
 
         }
+        public override List<string> SortOptions => new()
+        {
+            "Bicep Curls",
+            "Tricep Dips",
+            "Hammer Curls",
+            "Pushdowns"
+        };
         public override string GetDesc()
         {
-            return "This is a Truck. They usually have more than four wheels, and usually carry a maximum of 2 people, 30 if counting the trailer, another 10 if counting the roof if you're really brave.";
+            return "Arm workout";
         }
         public override string ToString()
         {
