@@ -8,7 +8,7 @@
             <Image Source="bicep_curl.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
             
             <HorizontalStackLayout Spacing="20" HorizontalOptions="StartAndExpand">
-                <Entry Placeholder="Registreringsnummer" Text="{Binding RegistrationNumber}" />
+                <Entry Placeholder="kONSTIGT NUMMER" Text="{Binding RegistrationNumber}" />
                 <Label Text="Välj typ:" VerticalOptions="Center"/>
                 <Picker Title="Välj typ"
                     ItemsSource="{Binding VehicleTypes}"

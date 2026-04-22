@@ -8,10 +8,16 @@
     Title="fitness_app_mvvm">
 
 	<TabBar>
-		<ShellContent Title="Start" ContentTemplate="{DataTemplate local:MainPage}"/>
-		<ShellContent Title="Create" ContentTemplate="{DataTemplate local:CreatePage}"/>
-		<ShellContent Title="Settings" ContentTemplate="{DataTemplate local:SettingsPage}"/>
-	</TabBar>
+        <Tab>
+            <ShellContent Title="Start" ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+        <Tab>
+            <ShellContent Title="Create" ContentTemplate="{DataTemplate local:CreatePage}"/>
+        </Tab>
+        <Tab>
+            <ShellContent Title="Create" ContentTemplate="{DataTemplate local:CreatePage}"/>
+        </Tab>
+    </TabBar>
 
 
 </Shell>

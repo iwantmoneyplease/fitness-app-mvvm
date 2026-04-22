@@ -22,7 +22,7 @@ namespace fitness_app_mvvm.ViewModel
         public ICommand LegCommand { get; }
         public ICommand CoreCommand { get; }
 
-        public WorkoutViewModel()
+        public CreatePageViewModel()
         {
             ArmCommand = new Command(() => SelectWorkout(new WorkoutArm()));
             LegCommand = new Command(() => SelectWorkout(new WorkoutLeg()));
