@@ -5,9 +5,9 @@
     <VerticalStackLayout>
         <Label Text="Vilken typ av workout?" />
 
-        <Button Text="Arm" Command="{Binding ArmCommand}" />
-        <Button Text="Leg" Command="{Binding LegCommand}" />
-        <Button Text="Core" Command="{Binding CoreCommand}" />
+        <Button Text="Arm" Command="{Binding ArmCommand}" Background="DarkGoldenrod"/>
+        <Button Text="Leg" Command="{Binding LegCommand}" Background="DarkGoldenrod"/>
+        <Button Text="Core" Command="{Binding CoreCommand}" Background="DarkGoldenrod"/>
 
         <CollectionView 
             ItemsSource="{Binding SortOptions}"
@@ -15,11 +15,28 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Button Text="{Binding .}" />
+                    <Button 
+                        Text="{Binding .}"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectExerciseCommand}"
+                        CommandParameter="{Binding .}" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
+
+        <VerticalStackLayout IsVisible="{Binding ShowQuantityInput}">
+
+            <Label Text="Tid (minuter)" />
+            <Entry
+                Placeholder="t.ex 30"
+                Keyboard="Numeric"
+                Text="{Binding Time}" />
+
+            <Label Text="Antal (reps)" />
+            <Entry 
+                Placeholder="t.ex 10"
+                Keyboard="Numeric"
+                Text="{Binding Quantity}" />
+        </VerticalStackLayout>
     </VerticalStackLayout>
     
 </ContentPage>
