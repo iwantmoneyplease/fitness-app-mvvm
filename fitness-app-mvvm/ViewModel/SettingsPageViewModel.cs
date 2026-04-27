@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 //Full Chatgpt kod
 //Detta är länken till konversationen: https://chatgpt.com/share/69b19551-bf10-8013-9e70-1f69e97d7a37
 namespace fitness_app_mvvm.ViewModel
 {
-    public class TypeSelectorViewModel
+    public class SettingsPageViewModel : INotifyPropertyChanged
     {
+        //PropertyChanged looks for new input
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        /*
         public ObservableCollection<Type> Types { get; } = new();
         public ObservableCollection<string> Properties { get; } = new();
 
@@ -52,6 +59,6 @@ namespace fitness_app_mvvm.ViewModel
         void SaveSelection()
         {
             Console.WriteLine($"Type: {SelectedType.Name}, Sort: {SelectedProperty}");
-        }
+        }*/
     }
 }

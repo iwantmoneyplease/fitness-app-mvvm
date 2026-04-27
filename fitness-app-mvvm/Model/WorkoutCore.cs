@@ -12,11 +12,17 @@ namespace fitness_app_mvvm.Model
         {
 
         }
+        public override List<string> SortOptions => new()
+        {
+            "Plank",
+            "Situps",
+            "Russian Twist",
+            "Leg Raises"
+        };
         public override string GetDesc()
         {
-            return "This is a motorcycle. Sewilius seems like the type to own one.";
+            return "Core workout";
         }
-
         public override string ToString()
         {
             return $"{Quantity} {Time} {Sort} {WorkoutType}";

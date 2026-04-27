@@ -1,53 +1,95 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using fitness_app_mvvm.Model;
 
 namespace fitness_app_mvvm.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class CreatePageViewModel : INotifyPropertyChanged
     {
-        //PropertyChanged looks for new input
         public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        void OnPropertyChanged([CallerMemberName] string n = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
 
-        //  GETS AND SETS
+        private Workout currentWorkout;
 
-        private bool showCoffeeOptions;
-        public bool ShowCoffeeOptions
+        // Properties
+        private string selectedExercise;
+        public string SelectedExercise
         {
-            get => showCoffeeOptions;
-            set => SetProperty(ref showCoffeeOptions, value);
+            get => selectedExercise;
+            set
+            {
+                selectedExercise = value;
+                OnPropertyChanged();
+                ShowQuantityInput = true;
+            }
+        }
+        private string time;
+        public string Time
+        {
+            get => time;
+            set
+            {
+                time = value;
+                OnPropertyChanged();
+            }
+        }
+        private string quantity;
+        public string Quantity
+        {
+            get => quantity;
+            set
+            {
+                quantity = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool showQuantityInput;
+        public bool ShowQuantityInput
+        {
+            get => showQuantityInput;
+            set
+            {
+                showQuantityInput = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> SortOptions { get; } = new();
+
+        public bool ShowSortOptions { get; set; }
+
+        // Command
+        public ICommand ArmCommand { get; }
+        public ICommand LegCommand { get; }
+        public ICommand CoreCommand { get; }
+        public ICommand SelectExerciseCommand { get; }
+        public CreatePageViewModel()
+        {
+            ArmCommand = new Command(() => SelectWorkout(new WorkoutArm()));
+            LegCommand = new Command(() => SelectWorkout(new WorkoutLeg()));
+            CoreCommand = new Command(() => SelectWorkout(new WorkoutCore()));
+
+            SelectExerciseCommand = new Command<string>(exercise =>
+            {
+                SelectedExercise = exercise;
+            });
         }
 
-        private bool showTeaOptions;
-        public bool ShowTeaOptions
+        private void SelectWorkout(Workout workout)
         {
-            get => showTeaOptions;
-            set => SetProperty(ref showTeaOptions, value);
-        }
+            currentWorkout = workout;
 
-        public ICommand CoffeeCommand { get; }
-        public ICommand TeaCommand { get; }
+            SortOptions.Clear();
 
-        public MainViewModel()
-        {
-            CoffeeCommand = new Command(() =>
+            foreach (var option in workout.SortOptions)
             {
-                ShowCoffeeOptions = true;
-                ShowTeaOptions = false;
-            });
+                SortOptions.Add(option);
+            }
 
-            TeaCommand = new Command(() =>
-            {
-                ShowTeaOptions = true;
-                ShowCoffeeOptions = false;
-            });
+            ShowSortOptions = true;
+            OnPropertyChanged(nameof(ShowSortOptions));
         }
     }
 }

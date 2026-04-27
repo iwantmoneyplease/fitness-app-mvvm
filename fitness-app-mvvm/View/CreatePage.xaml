@@ -1,35 +1,45 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="fitness_app_mvvm.View.CreatePage"
-             Title="CreatePage">
-    <VerticalStackLayout Padding="20" Spacing="10">
+             x:Class="fitness_app_mvvm.View.CreatePage">
+    
+    <VerticalStackLayout>
+        <Label Text="Vilken typ av workout?" />
 
-        <Label Text="Vad vill du dricka?" />
+        <Button Text="Arm" Command="{Binding ArmCommand}" Background="DarkGoldenrod"/>
+        <Button Text="Leg" Command="{Binding LegCommand}" Background="DarkGoldenrod"/>
+        <Button Text="Core" Command="{Binding CoreCommand}" Background="DarkGoldenrod"/>
 
-        <Button 
-        Text="Kaffe"
-        Command="{Binding CoffeeCommand}" />
+        <CollectionView 
+            ItemsSource="{Binding SortOptions}"
+            IsVisible="{Binding ShowSortOptions}">
 
-        <Button 
-        Text="Te"
-        Command="{Binding TeaCommand}" />
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button 
+                        Text="{Binding .}"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectExerciseCommand}"
+                        CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-        <!-- Kaffeval -->
-        <VerticalStackLayout IsVisible="{Binding ShowCoffeeOptions}">
-            <Label Text="Vilken typ av kaffe?" />
-            <Button Text="Latte" />
-            <Button Text="Cappuccino" />
-            <Button Text="Espresso" />
+        <VerticalStackLayout IsVisible="{Binding ShowQuantityInput}">
+
+            <Label Text="Tid (minuter)" />
+            <Entry
+                Placeholder="t.ex 30"
+                Keyboard="Numeric"
+                Text="{Binding Time}" />
+
+            <Label Text="Antal (reps)" />
+            <Entry 
+                Placeholder="t.ex 10"
+                Keyboard="Numeric"
+                Text="{Binding Quantity}" />
         </VerticalStackLayout>
-
-        <!-- Teval -->
-        <VerticalStackLayout IsVisible="{Binding ShowTeaOptions}">
-            <Label Text="Vilken typ av te?" />
-            <Button Text="Grönt te" />
-            <Button Text="Svart te" />
-            <Button Text="Chai" />
-        </VerticalStackLayout>
-
     </VerticalStackLayout>
+    
 </ContentPage>
+
+
+

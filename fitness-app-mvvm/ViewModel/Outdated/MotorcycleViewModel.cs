@@ -66,4 +66,4 @@ class MotorcycleViewModel : INotifyPropertyChanged
     }
 }
 
-/*
+*/

@@ -4,14 +4,23 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:fitness_app_mvvm.View"
-    Shell.FlyoutBehavior="Flyout"
-    Title="fitness_app_mvvm">
+     Title="fitness_app_mvvm">
 
-	<TabBar>
-		<ShellContent Title="Start" ContentTemplate="{DataTemplate local:MainPage}"/>
-		<ShellContent Title="Create" ContentTemplate="{DataTemplate local:CreatePage}"/>
-		<ShellContent Title="Settings" ContentTemplate="{DataTemplate local:SettingsPage}"/>
-	</TabBar>
+    <TabBar Shell.ForegroundColor="#0F0">
+        <!-- Style koden påverkar endast Tabben högst upp i view inte där man faktiskt ändrar sin page -->
+        <Tab Title="Start">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+        <Tab Title="Create">
+            <ShellContent ContentTemplate="{DataTemplate local:CreatePage}"/>
+        </Tab>
+        <Tab Title="Stats">
+            <ShellContent ContentTemplate="{DataTemplate local:StatsPage}"/>
+        </Tab>
+        <Tab Title="Settings">
+            <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
+        </Tab>
+    </TabBar>
 
 
 </Shell>

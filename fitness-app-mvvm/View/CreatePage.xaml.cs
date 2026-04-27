@@ -3,12 +3,12 @@ using fitness_app_mvvm.View;
 
 namespace fitness_app_mvvm.View
 {
-    public partial class Car : ContentPage
+    public partial class CreatePage : ContentPage
     {
-        public Car()
+        public CreatePage()
         {
             InitializeComponent();
-            // BindingContext = new CarViewModel();
+            BindingContext = new CreatePageViewModel();
         }                   
     }
 }
