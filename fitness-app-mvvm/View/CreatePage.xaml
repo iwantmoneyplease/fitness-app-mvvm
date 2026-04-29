@@ -36,6 +36,11 @@
                 Placeholder="t.ex 10"
                 Keyboard="Numeric"
                 Text="{Binding Quantity}" />
+            <Button 
+                Text="Spara workout"
+                Command="{Binding SaveCommand}"
+                Background="Green"
+                TextColor="White"/>
         </VerticalStackLayout>
     </VerticalStackLayout>
     
