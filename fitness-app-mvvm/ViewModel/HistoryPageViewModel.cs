@@ -9,7 +9,7 @@ using System.Text;
 
 namespace fitness_app_mvvm.ViewModel
 {
-    public class StatsPageViewModel : INotifyPropertyChanged
+    public class HistoryPageViewModel : INotifyPropertyChanged
     {
         //PropertyChanged looks for new input
         public event PropertyChangedEventHandler PropertyChanged;
