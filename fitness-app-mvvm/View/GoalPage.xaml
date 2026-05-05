@@ -35,11 +35,11 @@
         <CollectionView ItemsSource="{Binding Goals}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame>
+                    <Frame Margin="5" Padding="10" BorderColor="Gray">
                         <VerticalStackLayout>
-                            <Label Text="{Binding Sort}" />
-                            <Label Text="{Binding Time}" />
-                            <Label Text="{Binding Quantity}" />
+                            <Label Text="{Binding Sort}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Time, StringFormat='Tid: {0} min'}" />
+                            <Label Text="{Binding Quantity, StringFormat='Antal: {0}'}" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

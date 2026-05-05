@@ -43,20 +43,6 @@
                 Background="Green"
                 TextColor="White"/>
         </VerticalStackLayout>
-        
-        <CollectionView ItemsSource="{Binding Workouts}"> 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Margin="5" Padding="10" BorderColor="Gray">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Sort}" FontAttributes="Bold"/>
-                            <Label Text="{Binding Time, StringFormat='Tid: {0} min'}" />
-                            <Label Text="{Binding Quantity, StringFormat='Antal: {0}'}" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
 
