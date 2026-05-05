@@ -8,6 +8,7 @@ namespace fitness_app_mvvm.Model
 {
     public class UserSettings : User
     {
+        public override List<string> SortOptions { get; } = new();
         public UserSettings() : base(Type.UserSettings)
         {
 

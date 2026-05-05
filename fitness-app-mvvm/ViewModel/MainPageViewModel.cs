@@ -64,7 +64,7 @@ namespace fitness_app_mvvm.ViewModel
         {
             _storage = new JsonWorkoutStorageService();
 
-            RegisterCommand = new Command(RegisterExercise);
+            //RegisterCommand = new Command(RegisterExercise);
 
             SaveCommand = new Command(async () => await SaveAsync());
             _ = LoadAsync();
@@ -92,7 +92,7 @@ namespace fitness_app_mvvm.ViewModel
         }
 
         //COMMAND METHODS ------------------------------------------------------
-        private void RegisterExercise()
+        /*private void RegisterExercise()
         {
             try
             {
@@ -128,7 +128,7 @@ namespace fitness_app_mvvm.ViewModel
                 {
                     Debug.WriteLine($"Bilar finns i MainPage: {brum.Manufacturer}");
                 }
-                */
+                
 
                 //clear input
                 ClearEntryFields();
@@ -139,7 +139,7 @@ namespace fitness_app_mvvm.ViewModel
                 //shows a friendly pop-up instead of violently exploding the program like it did before
                 Application.Current.MainPage.DisplayAlert("Fel", ex.Message, "OK");
             }
-        }
+        }*/
 
         public void ClearEntryFields()
         {

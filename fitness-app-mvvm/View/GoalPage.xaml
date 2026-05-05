@@ -2,8 +2,49 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fitness_app_mvvm.View.GoalPage"
-             Title="Previous workouts">
+             Title="Goal Page">
     <VerticalStackLayout>
-			<ListView ItemsSource="{Binding UserHistory}" Margin="0,0,0,20"/>
+
+        <Label Text="Vilken typ av mål?" />
+
+        <Button Text="Arm" Command="{Binding ArmCommand}" />
+        <Button Text="Leg" Command="{Binding LegCommand}" />
+        <Button Text="Core" Command="{Binding CoreCommand}" />
+
+        <CollectionView ItemsSource="{Binding SortOptions}"
+                    IsVisible="{Binding ShowSortOptions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button 
+                    Text="{Binding .}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectGoalCommand}"
+                    CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout IsVisible="{Binding ShowInput}">
+
+            <Entry Placeholder="Tid" Text="{Binding Time}" />
+            <Entry Placeholder="Antal" Text="{Binding Quantity}" />
+
+            <Button Text="Spara mål" Command="{Binding SaveGoalCommand}" />
+
+        </VerticalStackLayout>
+
+        <CollectionView ItemsSource="{Binding Goals}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="5" Padding="10" BorderColor="Gray">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Sort}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Time, StringFormat='Tid: {0} min'}" />
+                            <Label Text="{Binding Quantity, StringFormat='Antal: {0}'}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </VerticalStackLayout>
 </ContentPage>

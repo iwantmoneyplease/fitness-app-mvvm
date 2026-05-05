@@ -1,4 +1,5 @@
-﻿using System;
+﻿using fitness_app_mvvm.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,13 +10,18 @@ using System.Text;
 
 namespace fitness_app_mvvm.ViewModel
 {
-    public class StatsPageViewModel : INotifyPropertyChanged
+    public class HistoryPageViewModel : INotifyPropertyChanged
     {
         //PropertyChanged looks for new input
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-    
+
+        public UserHistory UserHistory { get; set; }
+        public HistoryPageViewModel()
+        {
+            UserHistory = new UserHistory();
+        }
 
     }
 }

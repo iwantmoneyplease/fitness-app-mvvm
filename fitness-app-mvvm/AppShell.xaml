@@ -6,19 +6,25 @@
     xmlns:local="clr-namespace:fitness_app_mvvm.View"
      Title="fitness_app_mvvm">
 
-    <TabBar Shell.ForegroundColor="#0F0">
-        <!-- Style koden påverkar endast Tabben högst upp i view inte där man faktiskt ändrar sin page -->
+    <TabBar Shell.ForegroundColor="#0F0"
+            Shell.TabBarBackgroundColor="DarkRed"
+            Shell.TabBarTitleColor="White"
+            Shell.TabBarUnselectedColor="Red">
+
         <Tab Title="Start">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+        <Tab Title="History">
+            <ShellContent ContentTemplate="{DataTemplate local:HistoryPage}"/>
         </Tab>
         <Tab Title="Create">
             <ShellContent ContentTemplate="{DataTemplate local:CreatePage}"/>
         </Tab>
-        <Tab Title="Stats">
-            <ShellContent ContentTemplate="{DataTemplate local:StatsPage}"/>
-        </Tab>
         <Tab Title="Settings">
             <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
+        </Tab>
+        <Tab Title="Goals">
+            <ShellContent ContentTemplate="{DataTemplate local:GoalPage}"/>
         </Tab>
     </TabBar>
 
