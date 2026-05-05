@@ -7,8 +7,9 @@
 
         <Label Text="Vilken typ av mål?" />
 
-        <Button Text="Strength" Command="{Binding StrengthCommand}" />
-        <Button Text="Endurance" Command="{Binding EnduranceCommand}" />
+        <Button Text="Arm" Command="{Binding ArmCommand}" />
+        <Button Text="Leg" Command="{Binding LegCommand}" />
+        <Button Text="Core" Command="{Binding CoreCommand}" />
 
         <CollectionView ItemsSource="{Binding SortOptions}"
                     IsVisible="{Binding ShowSortOptions}">
