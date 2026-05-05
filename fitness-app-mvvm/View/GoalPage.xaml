@@ -3,7 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fitness_app_mvvm.View.GoalPage"
              Title="Previous workouts">
-    <VerticalStackLayout>
-			<ListView ItemsSource="{Binding UserHistory}" Margin="0,0,0,20"/>
+    <VerticalStackLayout Padding="20">
+
+        <Entry 
+        Placeholder="Skriv ditt mål..."
+        Text="{Binding GoalText}" />
+
+        <Button 
+        Text="Spara mål"
+        Command="{Binding SaveGoalCommand}" />
+
+        <CollectionView ItemsSource="{Binding Goals}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="5" Padding="10">
+                        <Label Text="{Binding GoalText}" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </VerticalStackLayout>
 </ContentPage>

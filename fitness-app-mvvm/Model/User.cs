@@ -11,12 +11,6 @@ namespace fitness_app_mvvm.Model
         // Medlemsvariabler
         public enum Type { UserGoal, UserHistory, UserSettings };
         private Type userSection;
-        #region outdatedfunc
-        //private string registrationNumber = string.Empty;
-        //private string manufacturer = string.Empty;
-        //private string modelName = string.Empty;
-        //private int modelYear = 0;
-        #endregion
 
         public abstract string GetDesc();
 

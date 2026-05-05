@@ -8,18 +8,20 @@ namespace fitness_app_mvvm.Model
 {
     public class UserGoal : User
     {
+        public string GoalText { get; set; } = string.Empty;
+
         public UserGoal() : base(Type.UserGoal)
         {
-
         }
+
         public override string GetDesc()
         {
-            return "Subclass for the goals of the user";
+            return GoalText;
         }
 
         public override string ToString()
         {
-            return $"return - UserGoal";
+            return GoalText;
         }
     }
 }
