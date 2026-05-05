@@ -14,8 +14,8 @@
         <Tab Title="Create">
             <ShellContent ContentTemplate="{DataTemplate local:CreatePage}"/>
         </Tab>
-        <Tab Title="Stats">
-            <ShellContent ContentTemplate="{DataTemplate local:StatsPage}"/>
+        <Tab Title="History">
+            <ShellContent ContentTemplate="{DataTemplate local:HistoryPage}"/>
         </Tab>
         <Tab Title="Settings">
             <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>

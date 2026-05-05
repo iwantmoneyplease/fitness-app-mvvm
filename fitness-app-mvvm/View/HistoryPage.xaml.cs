@@ -3,12 +3,12 @@ using fitness_app_mvvm.View;
 
 namespace fitness_app_mvvm.View
 {
-    public partial class StatsPage : ContentPage
+    public partial class HistoryPage : ContentPage
     {
-        public StatsPage()
+        public HistoryPage()
         {
             InitializeComponent();
-            BindingContext = new StatsPageViewModel();
+            BindingContext = new HistoryPageViewModel();
         }
     }
 }

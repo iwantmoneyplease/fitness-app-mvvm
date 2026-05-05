@@ -1,4 +1,5 @@
-﻿using System;
+﻿using fitness_app_mvvm.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,7 +16,12 @@ namespace fitness_app_mvvm.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-    
+
+        public UserHistory UserHistory { get; set; }
+        public HistoryPageViewModel()
+        {
+            UserHistory = new UserHistory();
+        }
 
     }
 }

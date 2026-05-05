@@ -44,7 +44,6 @@
                 TextColor="White"/>
         </VerticalStackLayout>
         
-        <!-- Endast för att se vad vi lägger till/laddar upp -->
         <CollectionView ItemsSource="{Binding Workouts}"> 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
