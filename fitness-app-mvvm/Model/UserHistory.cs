@@ -11,6 +11,7 @@ namespace fitness_app_mvvm.Model
     public class UserHistory : User
     {
         public ObservableCollection<Workout> Workouts { get; set; }
+        public override List<string> SortOptions { get; } = new();
 
         public UserHistory() : base(Type.UserHistory)
         {

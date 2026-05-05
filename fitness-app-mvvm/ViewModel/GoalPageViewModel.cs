@@ -1,70 +1,88 @@
 ﻿using fitness_app_mvvm.Model;
 using fitness_app_mvvm.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
 
-namespace fitness_app_mvvm.ViewModel
+public class GoalPageViewModel : INotifyPropertyChanged
 {
-    public class GoalPageViewModel : INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+    void OnPropertyChanged([CallerMemberName] string n = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
+
+    private UserGoal currentGoal;
+
+    public ObservableCollection<UserGoal> Goals => GoalService.Instance.GoalItems;
+
+    public ObservableCollection<string> SortOptions { get; } = new();
+
+    public ICommand ArmCommand { get; }
+    public ICommand LegCommand { get; }
+    public ICommand CoreCommand { get; }
+    public ICommand SelectGoalCommand { get; }
+    public ICommand SaveGoalCommand { get; }
+
+    private string selectedSort;
+    public string SelectedSort
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string n = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
+        get => selectedSort;
+        set { selectedSort = value; OnPropertyChanged(); }
+    }
 
-        private readonly IGoalStorageService _storage;
+    public string Time { get; set; }
+    public string Quantity { get; set; }
 
-        public ObservableCollection<UserGoal> Goals => GoalService.Instance.GoalItems;
+    public bool ShowSortOptions { get; set; }
+    public bool ShowInput { get; set; }
 
-        private string goalText;
-        public string GoalText
+    public GoalPageViewModel()
+    {
+        ArmCommand = new Command(() => SelectGoal(new GoalArm()));
+        LegCommand = new Command(() => SelectGoal(new GoalLeg()));
+        CoreCommand = new Command(() => SelectGoal(new GoalCore()));
+
+        SelectGoalCommand = new Command<string>(s =>
         {
-            get => goalText;
-            set { goalText = value; OnPropertyChanged(); }
-        }
+            SelectedSort = s;
+            ShowInput = true;
+            OnPropertyChanged(nameof(ShowInput));
+        });
 
-        public ICommand SaveGoalCommand { get; }
+        SaveGoalCommand = new Command(SaveGoal);
+    }
 
-        public GoalPageViewModel()
-        {
-            _storage = new JsonGoalStorageService();
+    private void SelectGoal(UserGoal goal)
+    {
+        currentGoal = goal;
 
-            SaveGoalCommand = new Command(async () => await SaveGoal());
-            _ = LoadAsync();
-        }
+        SortOptions.Clear();
+        foreach (var s in goal.SortOptions)
+            SortOptions.Add(s);
 
-        private async Task LoadAsync()
-        {
-            var goals = await _storage.LoadAsync();
-            Goals.Clear();
+        ShowSortOptions = true;
+        OnPropertyChanged(nameof(ShowSortOptions));
+    }
 
-            foreach (var g in goals)
-                Goals.Add(g);
-        }
+    private void SaveGoal()
+    {
+        if (currentGoal == null || string.IsNullOrEmpty(SelectedSort))
+            return;
 
-        private async Task SaveAsync()
-        {
-            await _storage.SaveAsync(Goals);
-        }
+        currentGoal.Sort = SelectedSort;
+        currentGoal.Time = Time;
+        currentGoal.Quantity = Quantity;
 
-        private async Task SaveGoal()
-        {
-            if (string.IsNullOrWhiteSpace(GoalText))
-                return;
+        Goals.Add(currentGoal);
 
-            var goal = new UserGoal();
+        // reset
+        SelectedSort = null;
+        Time = string.Empty;
+        Quantity = string.Empty;
+        ShowInput = false;
+        ShowSortOptions = false;
 
-            Goals.Add(goal);
-
-            await SaveAsync();
-
-            GoalText = string.Empty;
-        }
+        OnPropertyChanged(nameof(ShowInput));
+        OnPropertyChanged(nameof(ShowSortOptions));
     }
 }

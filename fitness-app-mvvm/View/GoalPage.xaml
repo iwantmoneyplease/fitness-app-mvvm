@@ -2,22 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fitness_app_mvvm.View.GoalPage"
-             Title="Previous workouts">
-    <VerticalStackLayout Padding="20">
+             Title="Goal Page">
+    <VerticalStackLayout>
 
-        <Entry 
-        Placeholder="Skriv ditt mål..."
-        Text="{Binding GoalText}" />
+        <Label Text="Vilken typ av mål?" />
 
-        <Button 
-        Text="Spara mål"
-        Command="{Binding SaveGoalCommand}" />
+        <Button Text="Strength" Command="{Binding StrengthCommand}" />
+        <Button Text="Endurance" Command="{Binding EnduranceCommand}" />
+
+        <CollectionView ItemsSource="{Binding SortOptions}"
+                    IsVisible="{Binding ShowSortOptions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button 
+                    Text="{Binding .}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectGoalCommand}"
+                    CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout IsVisible="{Binding ShowInput}">
+
+            <Entry Placeholder="Tid" Text="{Binding Time}" />
+            <Entry Placeholder="Antal" Text="{Binding Quantity}" />
+
+            <Button Text="Spara mål" Command="{Binding SaveGoalCommand}" />
+
+        </VerticalStackLayout>
 
         <CollectionView ItemsSource="{Binding Goals}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="5" Padding="10">
-                        <Label Text="{Binding GoalText}" />
+                    <Frame>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Sort}" />
+                            <Label Text="{Binding Time}" />
+                            <Label Text="{Binding Quantity}" />
+                        </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -13,6 +13,7 @@ namespace fitness_app_mvvm.Model
         private Type userSection;
 
         public abstract string GetDesc();
+        public abstract List<string> SortOptions { get; }
 
         // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
         protected User() { }
