@@ -5,7 +5,8 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <Image Source="bicep_curl.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
+            <Image Source="bicep_curl.jpg" Aspect="AspectFit" Margin="0,0,0,20"/>
+            <Label Text="{Binding DisplayName, StringFormat='Hej {0}!'}" />
             <CollectionView ItemsSource="{Binding Workouts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

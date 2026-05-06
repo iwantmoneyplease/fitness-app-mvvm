@@ -16,9 +16,12 @@ namespace fitness_app_mvvm.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        public string DisplayName => App.CurrentUser.Settings.Username;
 
         public ObservableCollection<Workout> Workouts => App.CurrentUser.History.Workouts;
         public string SummaryText => App.CurrentUser.History.GetDesc();
@@ -26,6 +29,7 @@ namespace fitness_app_mvvm.ViewModel
         //refresh the summary text
         public void Refresh()
         {
+            OnPropertyChanged(nameof(DisplayName));
             OnPropertyChanged(nameof(Workouts));
             OnPropertyChanged(nameof(SummaryText));
         }
