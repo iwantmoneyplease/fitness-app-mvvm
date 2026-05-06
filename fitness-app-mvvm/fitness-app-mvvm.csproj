@@ -71,9 +71,6 @@
 	  <Compile Update="View\GoalPage.xaml.cs">
 	    <DependentUpon>GoalPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\HistoryPage.xaml.cs">
-	    <DependentUpon>HistoryPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="View\SettingsPage.xaml.cs">
 	    <DependentUpon>SettingsPage.xaml</DependentUpon>
 	  </Compile>
@@ -87,9 +84,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\GoalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\HistoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\SettingsPage.xaml">

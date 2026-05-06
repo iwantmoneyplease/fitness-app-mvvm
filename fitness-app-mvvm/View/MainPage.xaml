@@ -7,6 +7,8 @@
         <VerticalStackLayout>
             <Image Source="bicep_curl.jpg" Aspect="AspectFit" Margin="0,0,0,20"/>
             <Label Text="{Binding DisplayName, StringFormat='Hej {0}!'}" />
+
+            <Label Text="{Binding SummaryText}" />
             <CollectionView ItemsSource="{Binding Workouts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

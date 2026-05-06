@@ -32,7 +32,7 @@
 
         </VerticalStackLayout>
 
-        <HorizontalStackLayout HorizontalOptions="FillAndExpand" Margin="5">
+        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
             <Button Text="Uncompleted"/>
             <Button Text="Completed"/>
         </HorizontalStackLayout>
