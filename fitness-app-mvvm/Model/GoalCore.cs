@@ -8,18 +8,8 @@ namespace fitness_app_mvvm.Model
 {
     public class GoalCore : UserGoal
     {
-        public override List<string> SortOptions => new()
-        {
-            "Plank",
-            "Situps",
-            "Russian Twist",
-            "Leg Raises"
-        };
-
-        public override string GetDesc()
-        {
-            return $"Core goal: {Sort}";
-        }
-
+        public override List<string> SortOptions => new() { "Plank", "Situps", "Russian Twist", "Leg Raises" };
+        //This makes the generic list in userGoal specific to the type of exercise
+        public override string GetDesc() => $"core goal: {Sort} ({Quantity} reps)";
     }
 }

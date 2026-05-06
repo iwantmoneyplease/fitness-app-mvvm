@@ -32,6 +32,11 @@
 
         </VerticalStackLayout>
 
+        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+            <Button Text="Uncompleted"/>
+            <Button Text="Completed"/>
+        </HorizontalStackLayout>
+
         <CollectionView ItemsSource="{Binding Goals}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

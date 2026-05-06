@@ -1,5 +1,6 @@
 ﻿using fitness_app_mvvm.Model;
 using fitness_app_mvvm.Services;
+using fitness_app_mvvm.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,137 +16,158 @@ namespace fitness_app_mvvm.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        //PropertyChanged looks for new input
+
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        public IList<Workout.Type> WorkoutTypes { get; } =
-        Enum.GetValues(typeof(Workout.Type)).Cast<Workout.Type>().ToList();
 
-        private readonly IWorkoutStorageService _storage;
+        public string DisplayName => App.CurrentUser.Settings.Username;
 
-        //INPUT (Get:Set) -------------------------------------------------------
-        private string _quantity;
-        public string Quantity
+        public ObservableCollection<Workout> Workouts => App.CurrentUser.History.Workouts;
+        public string SummaryText => App.CurrentUser.History.GetDesc();
+
+        //refresh the summary text
+        public void Refresh()
         {
-            get => _quantity;
-            set { _quantity = value; OnPropertyChanged(); }
-        }
-
-        private string _time;
-        public string Time 
-        {
-            get => _time;
-            set { _time = value; OnPropertyChanged(); }
-        }
-
-        private string _sort;
-        public string Sort      
-        {
-            get => _sort;
-            set { _sort = value; OnPropertyChanged(); }
-        }
-
-        private Workout.Type _selectedType = Workout.Type.Arm;
-        public Workout.Type SelectedType
-        {
-            get => _selectedType;
-            set { _selectedType = value; OnPropertyChanged(); }
-        }
-
-        //COMMAND AND SEARCH ----------------------------------------------------
-        public ObservableCollection<Workout> Workouts => WorkoutService.Instance.WorkoutItems;
-
-        //Commands for buttons
-        public ICommand RegisterCommand { get; }
-        public ICommand SaveCommand { get; }
-
-        public MainPageViewModel()
-        {
-            _storage = new JsonWorkoutStorageService();
-
-            //RegisterCommand = new Command(RegisterExercise);
-
-            SaveCommand = new Command(async () => await SaveAsync());
-            _ = LoadAsync();
-        }
-
-        private async Task LoadAsync()
-        {
-            try
-            {
-                var workouts = await _storage.LoadAsync();
-                Workouts.Clear();
-
-                foreach (var workout in workouts)
-                    Workouts.Add(workout);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Load failed: " + ex);
-            }
-        }
-
-        private async Task SaveAsync()
-        {
-            await _storage.SaveAsync(Workouts);
-        }
-
-        //COMMAND METHODS ------------------------------------------------------
-        /*private void RegisterExercise()
-        {
-            try
-            {
-                Workout workout;
-
-                switch (SelectedType)
-                {
-                    case Workout.Type.Arm:
-                        workout = new WorkoutLeg();
-                        break;
-
-                    case Workout.Type.Leg:
-                        workout = new WorkoutCore();
-                        break;
-
-                    case Workout.Type.Core:
-                        workout = new WorkoutArm();
-                        break;
-
-                    default:
-                        throw new ArgumentException("Välj en giltig fordons typ");
-                }
-
-                workout.Quantity = Quantity;
-                workout.Time = Time;
-                workout.Sort = Sort;
-
-                WorkoutService.Instance.WorkoutItems.Add(workout);
-
-                //TODO Vad är detta ???
-                /*
-                foreach (var brum in WorkoutService.Instance.WorkoutItems)
-                {
-                    Debug.WriteLine($"Bilar finns i MainPage: {brum.Manufacturer}");
-                }
-                
-
-                //clear input
-                ClearEntryFields();
-                SaveAsync();
-            }
-            catch (ArgumentException ex)
-            {
-                //shows a friendly pop-up instead of violently exploding the program like it did before
-                Application.Current.MainPage.DisplayAlert("Fel", ex.Message, "OK");
-            }
-        }*/
-
-        public void ClearEntryFields()
-        {
-            Quantity = string.Empty;
-            Time = string.Empty;
-            Sort = string.Empty;
+            OnPropertyChanged(nameof(DisplayName));
+            OnPropertyChanged(nameof(Workouts));
+            OnPropertyChanged(nameof(SummaryText));
         }
     }
 }
+
+/*public class MainPageViewModel : INotifyPropertyChanged
+{
+    //PropertyChanged looks for new input
+    public event PropertyChangedEventHandler PropertyChanged;
+    void OnPropertyChanged([CallerMemberName] string name = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    public IList<Workout.Type> WorkoutTypes { get; } =
+    Enum.GetValues(typeof(Workout.Type)).Cast<Workout.Type>().ToList();
+
+    private readonly IWorkoutStorageService _storage;
+
+    //INPUT (Get:Set) -------------------------------------------------------
+    private string _quantity;
+    public string Quantity
+    {
+        get => _quantity;
+        set { _quantity = value; OnPropertyChanged(); }
+    }
+
+    private string _time;
+    public string Time 
+    {
+        get => _time;
+        set { _time = value; OnPropertyChanged(); }
+    }
+
+    private string _sort;
+    public string Sort      
+    {
+        get => _sort;
+        set { _sort = value; OnPropertyChanged(); }
+    }
+
+    private Workout.Type _selectedType = Workout.Type.Arm;
+    public Workout.Type SelectedType
+    {
+        get => _selectedType;
+        set { _selectedType = value; OnPropertyChanged(); }
+    }
+
+    //COMMAND AND SEARCH ----------------------------------------------------
+    public ObservableCollection<Workout> Workouts => WorkoutService.Instance.WorkoutItems;
+
+    //Commands for buttons
+    public ICommand RegisterCommand { get; }
+    public ICommand SaveCommand { get; }
+
+    public MainPageViewModel()
+    {
+        _storage = new JsonWorkoutStorageService();
+
+        //RegisterCommand = new Command(RegisterExercise);
+
+        SaveCommand = new Command(async () => await SaveAsync());
+        _ = LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            var workouts = await _storage.LoadAsync();
+            Workouts.Clear();
+
+            foreach (var workout in workouts)
+                Workouts.Add(workout);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Load failed: " + ex);
+        }
+    }
+
+    private async Task SaveAsync()
+    {
+        await _storage.SaveAsync(Workouts);
+    }
+
+    //COMMAND METHODS ------------------------------------------------------
+    /*private void RegisterExercise()
+    {
+        try
+        {
+            Workout workout;
+
+            switch (SelectedType)
+            {
+                case Workout.Type.Arm:
+                    workout = new WorkoutLeg();
+                    break;
+
+                case Workout.Type.Leg:
+                    workout = new WorkoutCore();
+                    break;
+
+                case Workout.Type.Core:
+                    workout = new WorkoutArm();
+                    break;
+
+                default:
+                    throw new ArgumentException("Välj en giltig fordons typ");
+            }
+
+            workout.Quantity = Quantity;
+            workout.Time = Time;
+            workout.Sort = Sort;
+
+            WorkoutService.Instance.WorkoutItems.Add(workout);
+
+            //TODO Vad är detta ???
+            /*
+            foreach (var brum in WorkoutService.Instance.WorkoutItems)
+            {
+                Debug.WriteLine($"Bilar finns i MainPage: {brum.Manufacturer}");
+            }
+
+
+            //clear input
+            ClearEntryFields();
+            SaveAsync();
+        }
+        catch (ArgumentException ex)
+        {
+            //shows a friendly pop-up instead of violently exploding the program like it did before
+            Application.Current.MainPage.DisplayAlert("Fel", ex.Message, "OK");
+        }
+    }
+
+    public void ClearEntryFields()
+    {
+        Quantity = string.Empty;
+        Time = string.Empty;
+        Sort = string.Empty;
+    }
+}*/
