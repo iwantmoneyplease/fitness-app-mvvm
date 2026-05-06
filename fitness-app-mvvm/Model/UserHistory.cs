@@ -1,31 +1,28 @@
-﻿using fitness_app_mvvm.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using fitness_app_mvvm.ViewModel;
 
 namespace fitness_app_mvvm.Model
 {
-    public class UserHistory : User
+    public class UserHistory
     {
         public ObservableCollection<Workout> Workouts { get; set; }
-        public override List<string> SortOptions { get; } = new();
 
-        public UserHistory() : base(Type.UserHistory)
+        public UserHistory()
         {
             Workouts = WorkoutService.Instance.WorkoutItems;
         }
 
-        public override string GetDesc()
+        public string GetDesc() //nice if you want to know the nr of workouts
         {
-            return "Subclass for the done workouts of the user";
+            if (Workouts == null || Workouts.Count == 0)
+                return "No workouts completed";
+
+            return $"You have completed {Workouts.Count} workouts";
         }
 
         public override string ToString()
         {
-            return $"return - UserHistory";
+            return $"UserHistory: {Workouts.Count} items";
         }
     }
 }

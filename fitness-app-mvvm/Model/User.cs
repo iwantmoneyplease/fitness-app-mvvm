@@ -6,26 +6,16 @@ namespace fitness_app_mvvm.Model
     [JsonDerivedType(typeof(UserGoal), "user")]
     [JsonDerivedType(typeof(UserHistory), "userhistory")]
     [JsonDerivedType(typeof(UserSettings), "usersettings")]
-    public abstract class User
+
+    //no longer abstract, because something like userHistory shouldn't be "a user"
+    public class User
     {
-        // Medlemsvariabler
-        public enum Type { UserGoal, UserHistory, UserSettings };
-        private Type userSection;
+        public string Username { get; set; }
+        public UserSettings Settings { get; set; } = new();
+        public UserHistory History { get; set; } = new();
 
-        public abstract string GetDesc();
-        public abstract List<string> SortOptions { get; }
+        public List<UserGoal> Goals { get; set; } = new();
 
-        // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
-        protected User() { }
-        public User(Type userSection) // en konstruktor kan, men måste inte, ta parametrar
-        {
-            this.userSection = userSection;
-        }
-
-        public Type UserType
-        {
-            get { return userSection; }
-            set { userSection = value; }
-        }
+        public User() { }
     }
 }

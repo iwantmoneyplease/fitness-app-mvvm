@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace fitness_app_mvvm.Model
 {
-    public class UserGoal : User
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+    [JsonDerivedType(typeof(GoalArm), "arm_goal")]
+    [JsonDerivedType(typeof(GoalLeg), "leg_goal")]
+    [JsonDerivedType(typeof(GoalCore), "core_goal")]
+    public abstract class UserGoal
     {
         public enum GoalType { Strength, Endurance, Mobility }
 
@@ -15,11 +15,8 @@ namespace fitness_app_mvvm.Model
         private string time = string.Empty;
         private string sort = string.Empty;
 
-        public override List<string> SortOptions { get; } = new();
-
-        public UserGoal() : base(Type.UserGoal)
-        {
-        }
+        // Abtract, because arm/leg/core will provide their own lists
+        public abstract List<string> SortOptions { get; }
 
         public GoalType Goal_Type
         {
@@ -44,19 +41,14 @@ namespace fitness_app_mvvm.Model
             get => sort;
             set
             {
+                //checks against specific sort value
                 if (SortOptions.Contains(value))
                     sort = value;
             }
         }
 
-        public override string GetDesc()
-        {
-            return $"{goalType} - {sort} ({time} min, {quantity} reps)";
-        }
+        public abstract string GetDesc();
 
-        public override string ToString()
-        {
-            return GetDesc();
-        }
+        public override string ToString() => GetDesc();
     }
 }

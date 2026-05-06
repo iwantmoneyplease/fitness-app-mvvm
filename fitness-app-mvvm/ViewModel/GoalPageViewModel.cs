@@ -1,4 +1,5 @@
-﻿using fitness_app_mvvm.Model;
+﻿using fitness_app_mvvm;
+using fitness_app_mvvm.Model;
 using fitness_app_mvvm.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -73,16 +74,10 @@ public class GoalPageViewModel : INotifyPropertyChanged
         currentGoal.Time = Time;
         currentGoal.Quantity = Quantity;
 
-        Goals.Add(currentGoal);
+        App.CurrentUser.Goals.Add(currentGoal);
 
-        // reset
-        SelectedSort = null;
-        Time = string.Empty;
-        Quantity = string.Empty;
-        ShowInput = false;
+        ShowInput = false;  //UI reset
         ShowSortOptions = false;
-
         OnPropertyChanged(nameof(ShowInput));
-        OnPropertyChanged(nameof(ShowSortOptions));
     }
 }

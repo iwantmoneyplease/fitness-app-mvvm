@@ -4,38 +4,23 @@
              x:Class="fitness_app_mvvm.View.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="10">
+        <VerticalStackLayout>
             <Image Source="bicep_curl.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
-            
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="StartAndExpand">
-                <Entry Placeholder="kONSTIGT NUMMER" Text="{Binding RegistrationNumber}" />
-                <Label Text="Välj typ:" VerticalOptions="Center"/>
-                <Picker Title="Välj typ"
-                    ItemsSource="{Binding VehicleTypes}"
-                    SelectedItem="{Binding SelectedType}" />
-            </HorizontalStackLayout>
-            <Entry Placeholder="Tillverkare"
-                   Text="{Binding Manufacturer}" />
-            <Entry Placeholder="Modell"
-                   Text="{Binding ModelName}" />
-            <Entry Placeholder="Modell år"
-                   Text="{Binding ModelYear}"/>
-            <Button Text="Registrera"
-                   Command="{Binding RegisterCommand}"
-                   BackgroundColor="DarkRed"/>
+            <CollectionView ItemsSource="{Binding Workouts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" Padding="10" BorderColor="Gray">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Sort}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Time, StringFormat='Tid: {0} min'}" />
+                                <Label Text="{Binding Quantity, StringFormat='Antal: {0}'}" />
 
-
-            <ListView ItemsSource="{Binding Vehicles}" Margin="0,0,0,20"/>
-
-            <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="20">
-                <Entry Placeholder="Sök registreringsnummer"
-                   Text="{Binding SearchQuery}" />
-
-                <Button Text="Sök"
-                    Command="{Binding SearchCommand}"
-                    BackgroundColor="DarkRed" />
-            </HorizontalStackLayout>
-            <Label Text="{Binding SearchResult}" TextColor="DarkRed" Margin="0,20,0,0"/>
+                                <Label Text="{Binding GetDesc}" TextColor="Gray" FontSize="Caption"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
 

@@ -12,16 +12,14 @@ namespace fitness_app_mvvm.ViewModel
 {
     public class HistoryPageViewModel : INotifyPropertyChanged
     {
-        //PropertyChanged looks for new input
         public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        public UserHistory UserHistory { get; set; }
+        public ObservableCollection<Workout> Workouts => App.CurrentUser.History.Workouts;
+
+        public string SummaryText => App.CurrentUser.History.GetDesc();
+
         public HistoryPageViewModel()
         {
-            UserHistory = new UserHistory();
         }
-
     }
 }

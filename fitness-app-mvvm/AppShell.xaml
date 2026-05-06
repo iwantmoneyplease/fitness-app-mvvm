@@ -14,13 +14,10 @@
         <Tab Title="Start">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
         </Tab>
-        <Tab Title="History">
-            <ShellContent ContentTemplate="{DataTemplate local:HistoryPage}"/>
-        </Tab>
         <Tab Title="Create">
             <ShellContent ContentTemplate="{DataTemplate local:CreatePage}"/>
         </Tab>
-        <Tab Title="Settings">
+        <Tab Title="Profile">
             <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
         </Tab>
         <Tab Title="Goals">

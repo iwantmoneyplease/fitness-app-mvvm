@@ -1,31 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="fitness_app_mvvm.Model.User" Collapsed="true">
-    <Position X="2.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAAAIAAAAAAAACIAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\User.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="fitness_app_mvvm.Model.UserGoal" Collapsed="true">
-    <Position X="1.75" Y="2.5" Width="1.5" />
+    <Position X="2.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAABEAAAYAAAAEAAAAACAAAAAgCAAAQA=</HashCode>
       <FileName>Model\UserGoal.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fitness_app_mvvm.Model.UserHistory" Collapsed="true">
-    <Position X="3.5" Y="2.5" Width="1.5" />
+    <Position X="4.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABEIAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABEIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\UserHistory.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="fitness_app_mvvm.Model.UserSettings" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABEAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\UserSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fitness_app_mvvm.Model.Workout" Collapsed="true">
@@ -54,6 +40,41 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABEAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\WorkoutLeg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="fitness_app_mvvm.Model.GoalArm" Collapsed="true">
+    <Position X="1.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\GoalArm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="fitness_app_mvvm.Model.GoalCore" Collapsed="true">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\GoalCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="fitness_app_mvvm.Model.GoalLeg" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\GoalLeg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="fitness_app_mvvm.Model.User" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAgAACAAAAIAA=</HashCode>
+      <FileName>Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="fitness_app_mvvm.Model.UserSettings" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\UserSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

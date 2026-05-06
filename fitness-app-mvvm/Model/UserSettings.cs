@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 
 namespace fitness_app_mvvm.Model
 {
-    public class UserSettings : User
+    public class UserSettings
     {
-        public override List<string> SortOptions { get; } = new();
-        public UserSettings() : base(Type.UserSettings)
+        public string Username { get; set; } = "Pelle";
+        //public string ProfilePicture { get; set; } = "";
+        //public bool UseMetricSystem { get; set; } = true;
+        //ifall man vill lägga till detta
+
+        public UserSettings()
         {
 
         }
-        public override string GetDesc()
+
+        public string GetDesc()
         {
-            return "Subclass for the customizations and content (username, profile picture, etc.) of the user";
+            return "customize the app";
         }
 
         public override string ToString()
         {
-            return $"return - UserSettings";
+            return "UserSettings";
         }
     }
 }
