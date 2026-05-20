@@ -32,7 +32,27 @@
 
         </VerticalStackLayout>
 
-        <CollectionView ItemsSource="{Binding Goals}">
+        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+            <Button Text="Uncompleted" Command="{Binding ShowUncompletedCommand}" />
+            <Button Text="Completed" Command="{Binding ShowCompletedCommand}" />
+        </HorizontalStackLayout>
+
+        <CollectionView ItemsSource="{Binding Goals}" IsVisible="{Binding ShowUncompleted}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="5" Padding="10" BorderColor="Gray">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Sort}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Time, StringFormat='Tid: {0} min'}" />
+                            <Label Text="{Binding Quantity, StringFormat='Antal: {0}'}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <CollectionView ItemsSource="{Binding CompletedGoals}" IsVisible="{Binding ShowCompleted}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="5" Padding="10" BorderColor="Gray">
