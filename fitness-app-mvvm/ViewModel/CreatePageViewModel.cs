@@ -29,6 +29,8 @@ namespace fitness_app_mvvm.ViewModel
                 ShowQuantityInput = true;
             }
         }
+
+
         private string time;
         public string Time
         {
@@ -39,6 +41,8 @@ namespace fitness_app_mvvm.ViewModel
                 OnPropertyChanged();
             }
         }
+
+
         private string quantity;
         public string Quantity
         {
@@ -49,6 +53,8 @@ namespace fitness_app_mvvm.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        // Shows the Quantity and tine in view after Sort is selected
         private bool showQuantityInput;
         public bool ShowQuantityInput
         {
@@ -59,6 +65,8 @@ namespace fitness_app_mvvm.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        // Shows the Sort in view after Type is selected
         private bool showSortOptions;
         public bool ShowSortOptions
         {
@@ -69,6 +77,7 @@ namespace fitness_app_mvvm.ViewModel
                 OnPropertyChanged();
             }
         }
+
 
         public ObservableCollection<string> SortOptions { get; } = new();
         // Command
@@ -81,24 +90,26 @@ namespace fitness_app_mvvm.ViewModel
 
         public CreatePageViewModel()
         {
-            _storage = new JsonWorkoutStorageService();
+            _storage = new JsonWorkoutStorageService(); // Required for Json "Save" and "Load" Methods
 
             ArmCommand = new Command(() => SelectWorkout(new WorkoutArm()));
             LegCommand = new Command(() => SelectWorkout(new WorkoutLeg()));
             CoreCommand = new Command(() => SelectWorkout(new WorkoutCore()));
+            // Saves the current exercise in local variable aswell as making the next option appear
 
             SelectExerciseCommand = new Command<string>(exercise =>
             {
                 SelectedExercise = exercise;
             });
 
-            SaveCommand = new Command(async () => await SaveWorkout());
+            // No longer displays saved workouts on this page
+            SaveCommand = new Command(async () => await SaveWorkout());  
             _ = LoadAsync();
 
         }
 
         // Methods
-        private async Task LoadAsync()
+        private async Task LoadAsync() // Loads from json services
         {
             try
             {
@@ -112,23 +123,23 @@ namespace fitness_app_mvvm.ViewModel
             {
                 Debug.WriteLine("Load failed: " + ex);
             }
-        }
-        private async Task SaveAsync()
+        } 
+        private async Task SaveAsync() // Saves to json services
         {
             await _storage.SaveAsync(Workouts);
-        }
+        } 
         private void SelectWorkout(Workout workout)
         {
             currentWorkout = workout;
 
             SortOptions.Clear();
 
-            foreach (var option in workout.SortOptions)
+            foreach (var option in workout.SortOptions) // Can create a diffrent number of buttons based on the model
             {
                 SortOptions.Add(option);
             }
 
-            ShowSortOptions = true;
+            ShowSortOptions = true; // Shows the sorts 
             OnPropertyChanged(nameof(ShowSortOptions));
         }
 
@@ -144,9 +155,9 @@ namespace fitness_app_mvvm.ViewModel
             currentWorkout.Time = Time;
             currentWorkout.Quantity = Quantity;
 
-            Workouts.Add(currentWorkout);
+            Workouts.Add(currentWorkout); // Summary of workout
 
-            await SaveAsync();
+            await SaveAsync(); // Sends workout to json file
 
             ClearFields();
         }

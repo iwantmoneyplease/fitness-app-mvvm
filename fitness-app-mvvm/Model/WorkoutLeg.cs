@@ -19,6 +19,8 @@ namespace fitness_app_mvvm.Model
             "Step Ups",
             "Running"
         };
+        // Controlls the sorts shown in both Goal and Create
+
         public override string GetDesc()
         {
             return "Leg workout";

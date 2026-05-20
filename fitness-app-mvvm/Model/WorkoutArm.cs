@@ -13,13 +13,14 @@ namespace fitness_app_mvvm.Model
         {
 
         }
-        public override List<string> SortOptions => new()
+        public override List<string> SortOptions => new() 
         {
             "Bicep Curls",
             "Tricep Dips",
             "Hammer Curls",
             "Pushdowns"
         };
+        // Controlls the sorts shown in both Goal and Create
         public override string GetDesc()
         {
             return "Arm workout";
