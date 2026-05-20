@@ -12,11 +12,10 @@ namespace fitness_app_mvvm.ViewModel
 {
     class WorkoutService
     {
-        //singleton
         private static WorkoutService _instance;
         public static WorkoutService Instance => _instance ??= new WorkoutService();
 
-        //själva listan
+        //Workout items is the final destination for saved workouts
         public ObservableCollection<Workout> WorkoutItems { get; set; }
 
         private WorkoutService()

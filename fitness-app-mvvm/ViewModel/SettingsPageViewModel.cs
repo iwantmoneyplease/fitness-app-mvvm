@@ -11,6 +11,10 @@ namespace fitness_app_mvvm.ViewModel
 {
     public class SettingsPageViewModel : INotifyPropertyChanged
     {
+                public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
         public string Username
         {
             get => App.CurrentUser.Settings.Username;
@@ -20,15 +24,5 @@ namespace fitness_app_mvvm.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        //public bool IsMetric
-        //{
-        //    get => App.CurrentUser.Settings.IsMetric;
-        //    set { App.CurrentUser.Settings.IsMetric = value; OnPropertyChanged(); }
-        //}
-
-                public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

@@ -19,6 +19,8 @@ namespace fitness_app_mvvm.Model
             "Russian Twist",
             "Leg Raises"
         };
+        // Controlls the sorts shown in both Goal and Create
+
         public override string GetDesc()
         {
             return "Core workout";
