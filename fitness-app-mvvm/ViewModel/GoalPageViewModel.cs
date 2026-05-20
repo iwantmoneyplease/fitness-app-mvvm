@@ -1,9 +1,6 @@
-﻿using Android.Content;
-using fitness_app_mvvm;
-using fitness_app_mvvm.Model;
+﻿using fitness_app_mvvm.Model;
 using fitness_app_mvvm.Services;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -17,7 +14,6 @@ public class GoalPageViewModel : INotifyPropertyChanged
     private UserGoal currentGoal;
 
     public ObservableCollection<UserGoal> Goals => GoalService.Instance.GoalItems;
-    public ObservableCollection<UserGoal> CompletedGoals => GoalService.Instance.GoalItems;
 
     public ObservableCollection<string> SortOptions { get; } = new();
 
@@ -26,9 +22,6 @@ public class GoalPageViewModel : INotifyPropertyChanged
     public ICommand CoreCommand { get; }
     public ICommand SelectGoalCommand { get; }
     public ICommand SaveGoalCommand { get; }
-
-    public ICommand ShowUncompletedCommand { get; }
-    public ICommand ShowCompletedCommand { get; }
 
     private string selectedSort;
     public string SelectedSort
@@ -43,17 +36,11 @@ public class GoalPageViewModel : INotifyPropertyChanged
     public bool ShowSortOptions { get; set; }
     public bool ShowInput { get; set; }
 
-    public bool ShowUncompleted { get; set; }
-    public bool ShowCompleted { get; set; }
-
     public GoalPageViewModel()
     {
         ArmCommand = new Command(() => SelectGoal(new GoalArm()));
         LegCommand = new Command(() => SelectGoal(new GoalLeg()));
         CoreCommand = new Command(() => SelectGoal(new GoalCore()));
-
-        ShowUncompletedCommand = new Command(() => ShowUncompletedList());
-        ShowCompletedCommand = new Command(() => ShowCompletedList());
 
         SelectGoalCommand = new Command<string>(s =>
         {
@@ -86,30 +73,16 @@ public class GoalPageViewModel : INotifyPropertyChanged
         currentGoal.Time = Time;
         currentGoal.Quantity = Quantity;
 
-        App.CurrentUser.Goals.Add(currentGoal);
+        Goals.Add(currentGoal);
 
-        ShowInput = false;  //UI reset
+        // reset
+        SelectedSort = null;
+        Time = string.Empty;
+        Quantity = string.Empty;
+        ShowInput = false;
         ShowSortOptions = false;
+
         OnPropertyChanged(nameof(ShowInput));
-    }
-
-    private void ShowUncompletedList()
-    {
-
-    }
-    private void ShowCompletedList()
-    {
-
-    }
-
-    private void CompareGoal(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        foreach (var Goal in Goals.ToList())
-        {
-            if (!completedGoal.Contains(Goal))
-            {
-
-            }
-        }
+        OnPropertyChanged(nameof(ShowSortOptions));
     }
 }
